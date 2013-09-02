@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  before_filter :enforce_logged_in, except: [:index, :show]
+
   def index
     @questions = Question.all
     render :index
@@ -21,7 +23,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.find(params[:id])
+    @question = Question.includes(:answers => :user).find(params[:id])
     if @question
       render :show
     else

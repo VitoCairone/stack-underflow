@@ -1,5 +1,7 @@
 StackUnderflow::Application.routes.draw do
-  resources :questions
+  resources :questions do
+    resources :answers
+  end
   resources :users
   resource :session
 
