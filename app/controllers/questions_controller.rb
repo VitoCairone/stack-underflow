@@ -14,17 +14,22 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
+    #TODO
   end
 
   def show
+    #TODO
   end
 
   def update
+    #TODO
   end
 
   def new
+    #TODO
   end
 
   def edit
+    #TODO
   end
 end
