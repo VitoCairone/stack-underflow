@@ -5,6 +5,9 @@ class QuestionsController < ApplicationController
   end
 
   def create
+    params[:question][:user_id] = current_user || 1 #TODO: enforce login
+    params[:question][:best_answer_id] = -1
+    params[:question][:view_count] = 0
     @question = Question.new(params[:question])
     if @question.save
       redirect_to question_url(@question)
@@ -31,7 +34,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    #TODO
+    render :new
   end
 
   def edit
