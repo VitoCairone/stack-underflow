@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
   before_filter :enforce_logged_in, except: [:index, :show]
 
   def index
-    @questions = Question.all
+    @questions = Question.includes(:answers)
     render :index
   end
 

@@ -3,19 +3,39 @@
 <div class="show-question-title" id="question-title-<%=@question.id%>">
 <h2><%= @question.title %></h2>
 </div>
-<div class = "show-question-body" id="question-body-<%=@question.id%>">
+<div class="show-question-body" id="question-body-<%=@question.id%>">
 <%= @question.body %>
+<br><%= link_to "Add Comment", new_question_comment_url(@question) %>
 </div>
+<div class="question-comments">
+  <% @question.comments.each do |comment| %>
+    <hr>
+    <%= comment.body %> by <%= comment.user.username %>
+  <% end %>
+<div>
+
+
+<div><big><b><%= @question.answers.length %> Answers</b></big></div>
+<hr>
+<% if @question.answers %>
+<h1>Answers</h1>
+  <% @question.answers.each do |answer| %>
+    <small>Answered by <%= answer.user.username %>:</small>
+    <%= answer.body %>
+    <br><%= link_to "Add Comment", new_answer_comment_url(answer) %>
+
+    <div class="answer-comments">
+      <% answer.comments.each do |comment| %>
+        <hr>
+        <%= comment.body %> by <%= comment.user.username %>
+      <% end %>
+    <div>
+
+    <hr>
+  <% end %>
+<% end %>
 
 <div>
   <!-- TODO: Use jQuery to make this an in-place form -->
   <%= link_to "Post an Answer", new_question_answer_url(@question) %>
 </div>
-
-<% if @question.answers %>
-<h1>Answers</h1>
-  <% @question.answers.each do |answer| %>
-    <small>Answered by <%= answer.user.username %>:</small>
-    <p><%= answer.body %></p>
-  <% end %>
-<% end %>
