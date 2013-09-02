@@ -9,7 +9,7 @@ class QuestionsController < ApplicationController
     if @question.save
       redirect_to question_url(@question)
     else
-      render json: @question.errors.full_messages, status: 422
+      render text: @question.errors.full_messages, status: 422
     end
   end
 
@@ -18,7 +18,12 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    #TODO
+    @question = Question.find(params[:id])
+    if @question
+      render :show
+    else
+      render text: "Question #{params[:id]} not found", status: 404
+    end
   end
 
   def update

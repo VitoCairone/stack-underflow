@@ -8,6 +8,20 @@
 </head>
 <body>
 
+<!-- TODO: Fix These URLs! -->
+<div class="header-bar">
+  <span class="header-link" id="signup-link">
+    <%= link_to "sign up TD", questions_url %>
+  </span>
+  <span class="header-link" id="login-link">
+    <%= link_to "log in TD", questions_url %>
+  </span>
+</div>
+
+<div class="sub-header">
+  <%= link_to "Ask Question", new_question_url %>
+</div>
+
 <%= yield %>
 
 </body>
