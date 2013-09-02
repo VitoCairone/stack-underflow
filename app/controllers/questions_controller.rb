@@ -12,7 +12,7 @@ class QuestionsController < ApplicationController
     if @question.save
       redirect_to question_url(@question)
     else
-      render text: @question.errors.full_messages, status: 422
+      render_errors_of @question
     end
   end
 

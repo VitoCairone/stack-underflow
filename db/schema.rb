@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130902163236) do
+ActiveRecord::Schema.define(:version => 20130902210735) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20130902163236) do
     t.integer  "profile_views"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.string   "session_token"
   end
 
 end

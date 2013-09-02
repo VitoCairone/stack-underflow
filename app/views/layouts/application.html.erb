@@ -8,14 +8,19 @@
 </head>
 <body>
 
-<!-- TODO: Fix These URLs! -->
 <div class="header-bar">
-  <span class="header-link" id="signup-link">
-    <%= link_to "sign up TD", questions_url %>
-  </span>
-  <span class="header-link" id="login-link">
-    <%= link_to "log in TD", questions_url %>
-  </span>
+  <% if current_user %>
+    Logged in as <%= current_user.username %>
+     |
+     <%= link_to "log out", session_url, method: :delete %>
+  <% else %>
+    <span class="header-link" id="signup-link">
+      <%= link_to "sign up", new_user_url %>
+    </span>
+    <span class="header-link" id="login-link">
+      <%= link_to "log in", new_session_url %>
+    </span>
+  <% end %>
 </div>
 
 <div class="sub-header">
