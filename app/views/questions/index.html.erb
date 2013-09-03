@@ -1,24 +1,28 @@
-<h1>Questions Index</h1>
+<div class="index-head">
+<h2>Top Questions</h2>
+<hr>
+</div>
 
-<% @questions.each do |question| %>
-  <div class="index-question-title" id="question-title-<%=question.id%>">
-    <h2>
-      <%= link_to question.title, question_url(question) %>
-
-      <!-- TODO: DRY up this [delete] block in index/show -->
-      <% if owned(question) %>
-      <small><small>
-        [<%= link_to "delete", question_url(question), method: :delete %>]
-      </small></small>
-      <% end %>
-
-    </h2>
-
-  </div>
-  <div class = "index-question-body" id="question-body-<%=question.id%>">
-    <%= question.body %>
-  </div>
-  <div>
-    <small><b><%= question.answers.length %> anwers </b></small>
-  </div>
-<% end %>
+<div class="index-question-list">
+	<% @questions.each do |question| %>
+		<div class="index-question-block">
+		  <div class="index-question-title" id="question-title-<%=question.id%>">
+		    <h2>
+		      <%= link_to question.title, question_url(question) %>
+		      <!-- TODO: DRY up this [delete] block in index/show -->
+		      <% if owned(question) %>
+		      <small><small>
+		        [<%= link_to "delete", question_url(question), method: :delete %>]
+		      </small></small>
+		      <% end %>
+		    </h2>
+		  </div>
+		  <div class="index-question-body" id="question-body-<%=question.id%>">
+		    <%= question.body %>
+		  </div>
+		  <div class="index-answer-count">
+		    <small><b><%= question.answers.length %> anwers </b></small>
+		  </div>
+		</div>
+	<% end %>
+</div>

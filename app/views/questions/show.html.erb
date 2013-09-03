@@ -1,76 +1,81 @@
-<h1>Question</h1>
+<div class="show-question-master">
 
-<div class="show-question-title" id="question-title-<%=@question.id%>">
-<h2>
-  <%= @question.title %>
+	<div class="show-question-title" id="question-title-<%=@question.id%>">
+		<!-- Not a header tag because headers insert an extra blank line -->
+		<big><big><b>
+	  <%= @question.title %>
+		</big></big></b>
 
-  <!-- TODO: DRY up this [delete] block in index/show -->
-  <% if owned(@question) %>
-  <small><small>
-    [<%= link_to "delete", question_url(@question), method: :delete %>]
-  </small></small>
-  <% end %>
-  <!-- end [delete] block -->
+	  <!-- TODO: DRY up this [delete] block in index/show -->
+	  <% if owned(@question) %>
 
-</h2>
-</div>
-<div>
-by <%= @question.user.username %>
-</div>
-<div class="show-question-body" id="question-body-<%=@question.id%>">
-<%= @question.body %>
-<br><%= link_to "Add Comment", new_question_comment_url(@question) %>
-</div>
-<div class="question-comments">
-  <% @question.comments.each do |comment| %>
-    <hr>
-    <%= comment.body %> by <%= comment.user.username %>
-    <!-- TODO: DRY up this [delete] block in index/show -->
-    <% if owned(comment) %>
-    <small><small>
-      [<%= link_to "delete", question_comment_url(@question, comment), method: :delete %>]
-    </small></small>
-    <% end %>
-    <!-- end [delete] block -->
-  <% end %>
-<div>
+	  <small>
+	    [<%= link_to "delete", question_url(@question), method: :delete %>]
+		</small>
+	  <% end %>
+	  <!-- end [delete] block -->
 
+	</div>
+	<div class="show-question-author">
+	by <%= @question.user.username %>
+	</div>
+	<div class="show-question-body" id="question-body-<%=@question.id%>">
+	<%= @question.body %>
+	<br><%= link_to "Add Comment", new_question_comment_url(@question) %>
+	</div>
+	<div class="question-comments">
+	  <% @question.comments.each do |comment| %>
+	    <hr>
+	    <%= comment.body %> by <%= comment.user.username %>
+	    <!-- TODO: DRY up this [delete] block in index/show -->
+	    <% if owned(comment) %>
+	    <small><small>
+	      [<%= link_to "delete", question_comment_url(@question, comment), method: :delete %>]
+	    </small></small>
+	    <% end %>
+	    <!-- end [delete] block -->
+	  <% end %>
+	<div>
 
-<div><big><b><%= @question.answers.length %> Answers</b></big></div>
-<hr>
-<% if @question.answers %>
-<h1>Answers</h1>
-  <% @question.answers.each do |answer| %>
-    <small>Answered by <%= answer.user.username %>:</small>
-    <%= answer.body %>
-    <!-- TODO: DRY up this [delete] block in index/show -->
-    <% if owned(answer) %>
-    <small><small>
-      [<%= link_to "delete", question_answer_url(@question, answer), method: :delete %>]
-    </small></small>
-    <% end %>
-    <!-- end [delete] block -->
-    <br><%= link_to "Add Comment", new_answer_comment_url(answer) %>
+	<br><br>
 
-    <div class="answer-comments">
-      <% answer.comments.each do |comment| %>
-        <hr>
-        <%= comment.body %> by <%= comment.user.username %>
-        <!-- TODO: DRY up this [delete] block in index/show -->
-        <% if owned(comment) %>
-        <small><small>
-          [<%= link_to "delete", answer_comment_url(answer, comment), method: :delete %>]
-        </small></small>
-        <% end %>
-        <!-- end [delete] block -->
-      <% end %>
-    <div>
+	<div class="show-answer-count">
+		<big><b><%= @question.answers.length %> Answers</b></big>
+	</div>
+	<% if @question.answers %>
+	  <% @question.answers.each do |answer| %>
+	    <small>Answered by <%= answer.user.username %>:</small>
+	    <%= answer.body %>
+	    <!-- TODO: DRY up this [delete] block in index/show -->
+	    <% if owned(answer) %>
+	    <small><small>
+	      [<%= link_to "delete", question_answer_url(@question, answer), method: :delete %>]
+	    </small></small>
+	    <% end %>
+	    <!-- end [delete] block -->
+	    <br><%= link_to "Add Comment", new_answer_comment_url(answer) %>
 
-    <hr>
-  <% end %>
-<% end %>
+	    <div class="answer-comments">
+	      <% answer.comments.each do |comment| %>
+	        <hr>
+	        <%= comment.body %> by <%= comment.user.username %>
+	        <!-- TODO: DRY up this [delete] block in index/show -->
+	        <% if owned(comment) %>
+	        <small><small>
+	          [<%= link_to "delete", answer_comment_url(answer, comment), method: :delete %>]
+	        </small></small>
+	        <% end %>
+	        <!-- end [delete] block -->
+	      <% end %>
+	    <div>
 
-<div>
-  <!-- TODO: Use jQuery to make this an in-place form -->
-  <%= link_to "Post an Answer", new_question_answer_url(@question) %>
+	    <hr>
+	  <% end %>
+	<% end %>
+
+	<div>
+	  <!-- TODO: Use jQuery to make this an in-place form -->
+	  <%= link_to "Post an Answer", new_question_answer_url(@question) %>
+	</div>
+
 </div>
