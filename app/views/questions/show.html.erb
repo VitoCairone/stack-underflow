@@ -5,15 +5,9 @@
 		<big><big><b>
 	  <%= @question.title %>
 		</big></big></b>
-
-	  <!-- TODO: DRY up this [delete] block in index/show -->
-	  <% if owned(@question) %>
-
-	  <small>
-	    [<%= link_to "delete", question_url(@question), method: :delete %>]
-		</small>
-	  <% end %>
-	  <!-- end [delete] block -->
+		<%= render partial: "questions/delete",
+				locals: { object: @question,
+								  object_url: question_url(@question) } %>
 
 	</div>
 	<div class="show-question-author">
@@ -27,13 +21,9 @@
 	  <% @question.comments.each do |comment| %>
 	    <hr>
 	    <%= comment.body %> by <%= comment.user.username %>
-	    <!-- TODO: DRY up this [delete] block in index/show -->
-	    <% if owned(comment) %>
-	    <small><small>
-	      [<%= link_to "delete", question_comment_url(@question, comment), method: :delete %>]
-	    </small></small>
-	    <% end %>
-	    <!-- end [delete] block -->
+			<%= render partial: "questions/delete",
+					locals: { object: comment,
+									  object_url: question_comment_url(@question, comment) } %>
 	  <% end %>
 	<div>
 
@@ -46,26 +36,18 @@
 	  <% @question.answers.each do |answer| %>
 	    <small>Answered by <%= answer.user.username %>:</small>
 	    <%= answer.body %>
-	    <!-- TODO: DRY up this [delete] block in index/show -->
-	    <% if owned(answer) %>
-	    <small><small>
-	      [<%= link_to "delete", question_answer_url(@question, answer), method: :delete %>]
-	    </small></small>
-	    <% end %>
-	    <!-- end [delete] block -->
+			<%= render partial: "questions/delete",
+					locals: { object: answer,
+									  object_url: question_answer_url(@question, answer) } %>
 	    <br><%= link_to "Add Comment", new_answer_comment_url(answer) %>
 
 	    <div class="answer-comments">
 	      <% answer.comments.each do |comment| %>
 	        <hr>
 	        <%= comment.body %> by <%= comment.user.username %>
-	        <!-- TODO: DRY up this [delete] block in index/show -->
-	        <% if owned(comment) %>
-	        <small><small>
-	          [<%= link_to "delete", answer_comment_url(answer, comment), method: :delete %>]
-	        </small></small>
-	        <% end %>
-	        <!-- end [delete] block -->
+					<%= render partial: "questions/delete",
+							locals: { object: commment,
+											  object_url: answer_comment_url(answer, comment) } %>
 	      <% end %>
 	    <div>
 
