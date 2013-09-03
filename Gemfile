@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-ruby '1.9.3' # explicit version specification recommended by Heroku
+# explicit version specification recommended by Heroku
+ruby '1.9.3'
 
 gem 'rails', '3.2.14'
 

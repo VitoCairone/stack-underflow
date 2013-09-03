@@ -1,0 +1,28 @@
+<h1>Comment Form</h1>
+You are commenting on Question #<%= @question.id %>
+<hr>
+<div class="commentform-question-title" id="question-title-<%=@question.id%>">
+<h2><%= @question.title %></h2>
+</div>
+<div class = "commentform-question-body" id="question-body-<%=@question.id%>">
+<%= @question.body %>
+<hr>
+</div>
+
+<% if @on_answer %>
+  You are commenting on Answer #<%= @answer.id %>
+  <div class = "commentform-answer-body" id="answer-body-<%=@answer.id%>">
+  <%= @question.body %>
+  <hr>
+  </div>
+<% end %>
+
+<form action="<%= @create_url %>" method="Post">
+  <div>
+    <textarea name="comment[body]" id="comment_body"></textarea>
+  </div>
+  <div>
+    <input type="submit" value="Post Your Comment" id="submit-button">
+  </div>
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+</form>

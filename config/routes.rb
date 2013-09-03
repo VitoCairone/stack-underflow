@@ -1,4 +1,6 @@
 StackUnderflow::Application.routes.draw do
+  root to: "questions#index"
+
   resources :questions do
     resources :answers, only: [:create, :destroy, :new]
     resources :comments, only: [:create, :destroy, :new]

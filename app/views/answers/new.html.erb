@@ -1,0 +1,20 @@
+<h1>Answer Form</h1>
+You are answering Question #<%= @question.id %>
+<hr>
+<div class="answerform-question-title" id="question-title-<%=@question.id%>">
+<h2><%= @question.title %></h2>
+</div>
+<div class = "answerform-question-body" id="question-body-<%=@question.id%>">
+<%= @question.body %>
+<hr>
+</div>
+
+<form action="<%= question_answers_url %>" method="Post">
+  <div>
+    <textarea name="answer[body]" id="answer_body"></textarea>
+  </div>
+  <div>
+    <input type="submit" value="Post Your Answer" id="submit-button">
+  </div>
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+</form>
