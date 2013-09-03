@@ -17,8 +17,12 @@ class VotesController < ApplicationController
   end
 
   def create
+    puts "@@@@@@@@@@@@@@@@@"
+    puts params
     #Get associated objects and set extra paramaters
     set_context
+    params[:vote] = {}
+    params[:vote][:is_up] = params[:is_up]
     params[:vote][:user_id] = current_user.id
     if on_answer?
       params[:vote][:answer_id] = params[:answer_id]

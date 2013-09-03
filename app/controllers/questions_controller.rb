@@ -23,8 +23,16 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.includes(:answers => :user).find(params[:id])
+    # eager load of all the things
+    @question = Question.includes(
+      [{:answers => [{:comments => :user}, :user, :votes]},
+      {:comments => :user},
+      :user,
+      :votes]
+    ).find(params[:id])
+
     if @question
+      @answers = @question.answers.sort_by{ |answer| answer.rating }.reverse
       render :show
     else
       render text: "Question #{params[:id]} not found", status: 404

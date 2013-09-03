@@ -54,7 +54,7 @@ module ApplicationHelper
     if @object
       #TODO: fail non-owned destroy more loudly
       @object.destroy if owned(@object)
-      if klass == Question
+      if klass == Question #in this case :back may no longer exist
         redirect_to home_url
       else
         redirect_to :back
