@@ -5,8 +5,6 @@
 		<big><big><b>
 	  <%= @question.title %>
 		</big></big></b>
-		<%= render partial: "questions/delete",	locals: { object: @question,
-							 object_url: question_url(@question) } %>
 	</div>
 
 	<div class="show-question-author">
@@ -14,11 +12,14 @@
 	</div>
 	<div class="show-question-body" id="question-body-<%=@question.id%>">
 		<%= @question.body %>
-		<br><%= link_to "Add Comment", new_question_comment_url(@question) %>
+		<%= render partial: "questions/delete",	locals: { object: @question,
+							 object_url: question_url(@question) } %>
+		<small><small>
+			[<%= link_to "comment", new_question_comment_url(@question) %>]
+		</small></small>
 	</div>
 	<div class="question-comments">
 	  <% @question.comments.each do |comment| %>
-	    <hr>
 	    <%= comment.body %> by <%= comment.user.username %>
 			<%= render partial: "questions/delete",	locals: { object: comment,
 								 object_url: question_comment_url(@question, comment) } %>
@@ -33,9 +34,9 @@
 	  </div>
 		  <% @answers.each do |answer| %>
 			<div class="answer-container">
-		    <table>
+		    <table class="answer-table">
 					<tr>
-						<td class="vote-cell">
+						<td class="vote-cell" valign="top">
 							<%= link_to "/\\", answer_votes_url(answer, :is_up => true), method: :post %>
 							<br>
 							<%= answer.rating %>
@@ -43,18 +44,27 @@
 							<%= link_to "\\/", answer_votes_url(answer, :is_up => false), method: :post %>
 						</td>
 						<td>
-							<small>Answered by <%= answer.user.username %>:</small>
-					    <%= answer.body %>
-							<%= render partial: "questions/delete", locals: { object: answer,
-												 object_url: question_answer_url(@question, answer) } %>
-					    <br><%= link_to "Add Comment", new_answer_comment_url(answer) %>
+							<div class="single-answer">
+					    	<%= answer.body %>
+								<br><small>Answered by <%= answer.user.username %></small>
+								<%= render partial: "questions/delete", locals: { object: answer,
+													 object_url: question_answer_url(@question, answer) } %>
+								<small><small>
+						    	[<%= link_to "comment", new_answer_comment_url(answer) %>]
+								</small></small>
+							</div>
 
 					    <div class="answer-comments">
 					      <% answer.comments.each do |comment| %>
-					        <hr>
-					        <%= comment.body %> by <%= comment.user.username %>
+								<div class="single-answer-comment">
+
+					        <%= comment.body %>
+									<br><small><small>
+										by <%= comment.user.username %>
+									</small></small>
 									<%= render partial: "questions/delete",	locals: { object: comment,
 														 object_url: answer_comment_url(answer, comment) } %>
+								</div>
 					      <% end %>
 					    <div>
 						</td>
