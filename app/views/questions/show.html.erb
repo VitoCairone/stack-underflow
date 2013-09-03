@@ -53,7 +53,7 @@
 					      <% answer.comments.each do |comment| %>
 					        <hr>
 					        <%= comment.body %> by <%= comment.user.username %>
-									<%= render partial: "questions/delete",	locals: { object: commment,
+									<%= render partial: "questions/delete",	locals: { object: comment,
 														 object_url: answer_comment_url(answer, comment) } %>
 					      <% end %>
 					    <div>
