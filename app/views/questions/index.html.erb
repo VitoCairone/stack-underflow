@@ -4,11 +4,14 @@
   <div class="index-question-title" id="question-title-<%=question.id%>">
     <h2>
       <%= link_to question.title, question_url(question) %>
+
+      <!-- TODO: DRY up this [delete] block in index/show -->
       <% if owned(question) %>
       <small><small>
         [<%= link_to "delete", question_url(question), method: :delete %>]
       </small></small>
       <% end %>
+
     </h2>
 
   </div>
