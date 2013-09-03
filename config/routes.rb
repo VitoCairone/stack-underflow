@@ -1,15 +1,15 @@
 StackUnderflow::Application.routes.draw do
   resources :questions do
-    resources :answers
-    resources :comments
+    resources :answers, only: [:create, :destroy, :new]
+    resources :comments, only: [:create, :destroy, :new]
   end
-  resources :users
-  resource :session
+  resources :users, only: [:create, :destroy, :new]
+  resource :session, only: [:create, :destroy, :new]
   #/answers/ exists exclusively to nest comments underneath, so that
   # comments can be posted both on questions and on answers. The actual answers
   # routes are those nested under questions.
   resources :answers, only: [] do
-    resources :comments
+    resources :comments, only: [:create, :destroy, :new]
   end
 
   # The priority is based upon order of creation:

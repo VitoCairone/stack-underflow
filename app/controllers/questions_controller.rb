@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    params[:question][:user_id] = current_user || 1 #TODO: enforce login
+    params[:question][:user_id] = current_user.id
     params[:question][:best_answer_id] = -1
     params[:question][:view_count] = 0
     @question = Question.new(params[:question])
@@ -19,7 +19,7 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    #TODO
+    destroy_this Question
   end
 
   def show
@@ -31,15 +31,7 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def update
-    #TODO
-  end
-
   def new
     render :new
-  end
-
-  def edit
-    #TODO
   end
 end
