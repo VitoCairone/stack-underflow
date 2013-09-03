@@ -58,5 +58,14 @@ module StackUnderflow
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # this change was made in response to Heroku failing to compile the app
+    # with the following error:
+    #    rake aborted!
+    #       could not connect to server: Connection refused
+    #       Is the server running on host "127.0.0.1" and accepting
+    #       TCP/IP connections on port 5432?
+    config.assets.initialize_on_precompile = false
+
   end
 end
