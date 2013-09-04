@@ -1,10 +1,12 @@
 class Question < ActiveRecord::Base
-  attr_accessible :best_answer_id, :body, :title, :user_id, :view_count
+  attr_accessible :best_answer_id, :body, :title, :user_id, :view_count, :tag_ids
 
   has_many :answers, dependent: :destroy
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings
 
   def upvotes
     @votes ||= self.votes

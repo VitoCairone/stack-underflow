@@ -5,6 +5,8 @@ class Answer < ActiveRecord::Base
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
+  has_many :taggings
+  has_many :tags, through: :taggings
 
   def upvotes
     @votes ||= self.votes
