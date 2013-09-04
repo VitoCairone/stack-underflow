@@ -18,7 +18,9 @@
 		    </h2>
 		  </div>
 		  <div class="index-question-body" id="question-body-<%=question.id%>">
-		    <%= question.body %>
+				<!-- # Input is sanitized by the Markdown editor plugin before being
+					 	 # saved to the database -->
+		    <%= question.body.html_safe %>
 		  </div>
 		  <div class="index-answer-count">
 		    <small><b><%= question.answers.length %> anwers </b></small>
