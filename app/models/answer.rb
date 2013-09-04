@@ -8,12 +8,12 @@ class Answer < ActiveRecord::Base
 
   def upvotes
     @votes ||= self.votes
-    votes.select { |vote| vote.is_up }.count
+    votes.select { |vote| vote.is_up }.length
   end
 
   def downvotes
     @votes ||= self.votes
-    votes.select { |vote| !vote.is_up }.count
+    votes.select { |vote| !vote.is_up }.length
   end
 
   def rating

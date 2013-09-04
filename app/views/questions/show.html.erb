@@ -11,7 +11,8 @@
 		by <%= @question.user.username %>
 	</div>
 	<div class="show-question-body" id="question-body-<%=@question.id%>">
-		<%= @question.body %>
+		<!-- TODO: fix this -->
+		<%= @question.body.html_safe %>
 		<%= render partial: "questions/delete",	locals: { object: @question,
 							 object_url: question_url(@question) } %>
 		<small><small>
@@ -45,8 +46,7 @@
 						</td>
 						<td>
 							<div class="single-answer">
-								<!-- # Input is sanitized by Markdown.Sanitizer.js before being
-										 # sent to the database -->
+								<!-- TODO: fix this -->
 						    <%= answer.body.html_safe %>
 
 								<br><small>Answered by <%= answer.user.username %></small>
@@ -69,17 +69,76 @@
 														 object_url: answer_comment_url(answer, comment) } %>
 								</div>
 					      <% end %>
-					    <div>
+					    </div>
 						</td>
 					</tr>
 				</table>
+
+
 			</div><!--answer-container-->
 		  <% end %>
 	<% end %>
 
-	<div>
-	  <!-- TODO: Use jQuery to make this an in-place form -->
-	  <%= link_to "Post an Answer", new_question_answer_url(@question) %>
+	<a name="answer"></a>
+	<div class="answer-page-wmd">
+		<div class="wmd-panel submit-button">
+			<button id="new_answer_button">Submit Answer</button>
+		</div>
+		<div class="wmd-panel">
+		<div id="wmd-button-bar"></div>
+		<textarea class="wmd-input" id="wmd-input">
+		</textarea>
+		</div>
+		<div class="wmd-panel" id="preview-label">
+		Preview:
+		</div>
+		<div id="wmd-preview" class="wmd-panel wmd-preview">
+		</div>
 	</div>
+
+	<script type="text/javascript">
+	  (function () {
+	      var converter1 = Markdown.getSanitizingConverter();
+
+				//fenced block-quote ("""  """) plugin
+	      converter1.hooks.chain("preBlockGamut", function (text, rbg) {
+	          return text.replace(/^ {0,3}""" *\n((?:.*?\n)+?) {0,3}""" *$/gm, function (whole, inner) {
+	              return "<blockquote>" + rbg(inner) + "</blockquote>\n";
+	          });
+	      });
+
+	      var editor1 = new Markdown.Editor(converter1);
+
+	      editor1.run();
+	  })();
+
+		$(document).ready(function() {
+			$('#new_answer_button').on("click", function(event) {
+				event.preventDefault();
+				var converter = Markdown.getSanitizingConverter();
+
+				var user_text = converter.makeHtml($("#wmd-input").val());
+
+				//this is not adequate for production
+				//instead, store markup and convert on render,
+				//or use ruby to convert and sanitize in the controller
+				var data = {
+					answer: {
+						body: user_text
+					}
+				}
+
+				$.ajax({
+					url: "<%= question_answers_url(@question) %>",
+					type: "POST",
+					data: data,
+					success: function() {
+						console.log("AJAX request sent.")
+						document.location.reload(true);
+					}
+				});
+			});
+		});
+	</script>
 
 </div>

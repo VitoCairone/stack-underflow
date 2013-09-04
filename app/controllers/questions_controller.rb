@@ -3,6 +3,7 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = Question.includes(:answers)
+    @questions = @questions.sort_by{ |question| -question.rating }
     render :index
   end
 
@@ -32,7 +33,7 @@ class QuestionsController < ApplicationController
     ).find(params[:id])
 
     if @question
-      @answers = @question.answers.sort_by{ |answer| answer.rating }.reverse
+      @answers = @question.answers.sort_by{ |answer| -answer.rating }
       render :show
     else
       render text: "Question #{params[:id]} not found", status: 404

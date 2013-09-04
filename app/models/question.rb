@@ -5,4 +5,19 @@ class Question < ActiveRecord::Base
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
+
+  def upvotes
+    @votes ||= self.votes
+    votes.select { |vote| vote.is_up }.length
+  end
+
+  def downvotes
+    @votes ||= self.votes
+    votes.select { |vote| !vote.is_up }.length
+  end
+
+  def rating
+    upcount = upvotes
+    2 * upcount - @votes.length
+  end
 end

@@ -17,8 +17,6 @@ class VotesController < ApplicationController
   end
 
   def create
-    puts "@@@@@@@@@@@@@@@@@"
-    puts params
     #Get associated objects and set extra paramaters
     set_context
     params[:vote] = {}

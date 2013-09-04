@@ -6,39 +6,57 @@
 <div class="index-question-list">
 	<% @questions.each do |question| %>
 		<div class="index-question-block">
-		  <div class="index-question-title" id="question-title-<%=question.id%>">
-		    <h2>
-		      <%= link_to question.title, question_url(question) %>
-		      <!-- TODO: DRY up this [delete] block in index/show -->
-		      <% if owned(question) %>
-		      <small><small>
-		        [<%= link_to "delete", question_url(question), method: :delete %>]
-		      </small></small>
-		      <% end %>
-		    </h2>
-		  </div>
-		  <div class="index-question-body" id="question-body-<%=question.id%>">
-				<!-- # Input is sanitized by Markdown.Sanitizer.js before being sent
-					 	 # to the database -->
-		    <%= question.body.html_safe %>
-		  </div>
-		  <div class="index-answer-count">
-		    <small><b><%= question.answers.length %> anwers </b></small>
-		  </div>
+
+	    <table class="answer-table">
+				<tr>
+					<td class="vote-cell" valign="top">
+						<%= link_to "/\\", question_votes_url(question, :is_up => true), method: :post %>
+						<br>
+						<%= question.rating %>
+						<br>
+						<%= link_to "\\/", question_votes_url(question, :is_up => false), method: :post %>
+					</td>
+					<td>
+					  <div class="index-question-title" id="question-title-<%=question.id%>">
+					    <h2>
+					      <%= link_to question.title, question_url(question) %>
+								<%= render partial: "questions/delete", locals: { object: question,
+													 object_url: question_url(question) } %>
+					    </h2>
+					  </div>
+					  <div class="index-question-body" id="question-body-<%=question.id%>">
+							<!-- # Input is sanitized by Markdown.Sanitizer.js before being sent
+								 	 # to the database -->
+					    <%= question.body.html_safe %>
+					  </div>
+					  <div class="index-answer-count">
+					    <small><b><%= question.answers.length %> anwers </b></small>
+					  </div>
+					</td>
+				</tr>
+			</table>
 		</div>
 	<% end %>
-
-	<button id="new_question_button">Submit Question</button>
 </div>
 
+<a name="ask"></a>
+<div class="wmd-panel submit-button">
+	<button id="new_question_button">Submit Question</button>
+</div>
+<div class="wmd-panel" id="title-input">
+	<label for="question_title">Title</label>
+	<br><input type="text" name="question[title]" id="question_title">
+</div>
+<div class="wmd-panel" id="body-label">
+	Body
+</div>
 <div class="wmd-panel">
 <div id="wmd-button-bar"></div>
 <textarea class="wmd-input" id="wmd-input">
-Write Your Question Here!
-Tip: Some code syntax is escaped for security reasons.
-Always designate code snippets by indenting
-(or use the code button on the editor, with the binary digits)
 </textarea>
+</div>
+<div class="wmd-panel" id="preview-label">
+Preview:
 </div>
 <div id="wmd-preview" class="wmd-panel wmd-preview">
 </div>
@@ -66,9 +84,12 @@ Always designate code snippets by indenting
 
 			var user_text = converter.makeHtml($("#wmd-input").val());
 
+			//this is not adequate for production
+			//instead, store markup and convert on render,
+			//or use ruby to convert and sanitize in the controller
 			var data = {
 				question: {
-					title: "Raar",
+					title: $("#question_title").val(),
 					body: user_text
 				}
 			}
@@ -76,7 +97,6 @@ Always designate code snippets by indenting
 			$.ajax({
 				url: "<%= questions_url %>",
 				type: "POST",
-				//TODO: talk to Ned about the vulnerability inherent here
 				data: data,
 				success: function() {
 					console.log("AJAX request sent.")
