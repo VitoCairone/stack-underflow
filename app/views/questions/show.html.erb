@@ -45,7 +45,10 @@
 						</td>
 						<td>
 							<div class="single-answer">
-					    	<%= answer.body %>
+								<!-- # Input is sanitized by Markdown.Sanitizer.js before being
+										 # sent to the database -->
+						    <%= answer.body.html_safe %>
+
 								<br><small>Answered by <%= answer.user.username %></small>
 								<%= render partial: "questions/delete", locals: { object: answer,
 													 object_url: question_answer_url(@question, answer) } %>

@@ -18,8 +18,8 @@
 		    </h2>
 		  </div>
 		  <div class="index-question-body" id="question-body-<%=question.id%>">
-				<!-- # Input is sanitized by the Markdown editor plugin before being
-					 	 # saved to the database -->
+				<!-- # Input is sanitized by Markdown.Sanitizer.js before being sent
+					 	 # to the database -->
 		    <%= question.body.html_safe %>
 		  </div>
 		  <div class="index-answer-count">
@@ -76,6 +76,7 @@ Always designate code snippets by indenting
 			$.ajax({
 				url: "<%= questions_url %>",
 				type: "POST",
+				//TODO: talk to Ned about the vulnerability inherent here
 				data: data,
 				success: function() {
 					console.log("AJAX request sent.")
