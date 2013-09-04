@@ -13,3 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require Markdown.Converter
+//= require Markdown.Editor
+//= require Markdown.Sanitizer

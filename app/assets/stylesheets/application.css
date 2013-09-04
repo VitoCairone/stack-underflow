@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require_tree .
+ *= require pagedown.css
  */
 
 /* this allows the header to be flush with the top and sides the page.

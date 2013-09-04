@@ -25,4 +25,61 @@
 		  </div>
 		</div>
 	<% end %>
+
+	<button id="new_question_button">Submit Question</button>
 </div>
+
+<div class="wmd-panel">
+<div id="wmd-button-bar"></div>
+<textarea class="wmd-input" id="wmd-input">
+Write Your Question Here!
+Tip: Some code syntax is escaped for security reasons.
+Always designate code snippets by indenting
+(or use the code button on the editor, with the binary digits)
+</textarea>
+</div>
+<div id="wmd-preview" class="wmd-panel wmd-preview">
+</div>
+
+<script type="text/javascript">
+  (function () {
+      var converter1 = Markdown.getSanitizingConverter();
+
+			//fenced block-quote ("""  """) plugin
+      converter1.hooks.chain("preBlockGamut", function (text, rbg) {
+          return text.replace(/^ {0,3}""" *\n((?:.*?\n)+?) {0,3}""" *$/gm, function (whole, inner) {
+              return "<blockquote>" + rbg(inner) + "</blockquote>\n";
+          });
+      });
+
+      var editor1 = new Markdown.Editor(converter1);
+
+      editor1.run();
+  })();
+
+	$(document).ready(function() {
+		$('#new_question_button').on("click", function(event) {
+			event.preventDefault();
+			var converter = Markdown.getSanitizingConverter();
+
+			var user_text = converter.makeHtml($("#wmd-input").val());
+
+			var data = {
+				question: {
+					title: "Raar",
+					body: user_text
+				}
+			}
+
+			$.ajax({
+				url: "<%= questions_url %>",
+				type: "POST",
+				data: data,
+				success: function() {
+					console.log("AJAX request sent.")
+					document.location.reload(true);
+				}
+			});
+		});
+	});
+</script>
