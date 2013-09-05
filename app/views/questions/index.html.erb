@@ -10,11 +10,17 @@
 	    <table class="answer-table">
 				<tr>
 					<td class="vote-cell" valign="top">
-						<%= link_to "/\\", question_votes_url(question, :is_up => true), method: :post %>
-						<br>
-						<%= question.rating %>
-						<br>
-						<%= link_to "\\/", question_votes_url(question, :is_up => false), method: :post %>
+						<div class="vote-block">
+							<div class="vote-block-top vote-sub-block">
+							<%= link_to "", question_votes_url(question, :is_up => true), method: :post %>
+							</div>
+							<div class="vote-block-ctr vote-sub-block">
+							<%= question.rating %>
+							</div>
+							<div class="vote-block-bot vote-sub-block">
+							<%= link_to "", question_votes_url(question, :is_up => false), method: :post %>
+							</div>
+						</div>
 					</td>
 					<td>
 					  <div class="index-question-title" id="question-title-<%=question.id%>">
@@ -28,6 +34,13 @@
 							<!-- TODO: fix this -->
 					    <%= question.body.html_safe %>
 					  </div>
+						<div class="index-question-tags" id="question-tags-<%=question.id%>">
+							<% if (tags = question.tags) %>
+							  <% tags.each do |tag| %>
+								<span class="tag-show"><%=tag.name%></span>
+								<% end %>
+							<% end %>
+						</div>
 					  <div class="index-answer-count">
 					    <small><b><%= question.answers.length %> anwers </b></small>
 					  </div>
@@ -125,7 +138,7 @@
 			//or use ruby to convert and sanitize in the controller
 			var data = {
 				question: {
-					title: $("#question_title").val(),
+					title: $("#question_title").val() || "(no title)",
 					body: user_text,
 					tag_ids: tag_ids_arr
 				}
@@ -137,7 +150,7 @@
 				data: data,
 				success: function() {
 					console.log("AJAX request sent.")
-					//document.location.reload(true);
+					document.location.reload(true);
 				}
 			});
 		});

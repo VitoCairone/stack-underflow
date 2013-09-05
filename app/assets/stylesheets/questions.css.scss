@@ -24,6 +24,12 @@
 	a:active {color:#0050D0; text-decoration: underline;}  /* selected link */
 }
 
+.tag-show {
+	background-color: #e0eaf1;
+	border-bottom: 2px solid #b3cee1;
+	border-right: 2px solid #b3cee1;
+}
+
 .index-question-block {
 	border-bottom: 1px solid #aaa;
 }
@@ -53,8 +59,23 @@
 }
 
 .vote-cell {
-	width: 30px;
+	width: 45px;
 	font-size: 8pt;
+	text-align: center;
+}
+
+.vote-block {
+	border: 2px solid #f00;
+	height: 60px;
+	background-position: 0px -265px;
+	background-color: transparent;
+	background-image: url('SO_Sprites.png');
+}
+
+.vote-sub-block {
+	/* to align, height + border * 2 of sub-block must == height of block */
+	border: 1px solid #00f;
+	height: 18px;
 }
 
 .submit-button {
