@@ -1,3 +1,41 @@
 // Place all the styles related to the votes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.vote-cell {
+	width: 45px;
+	font-size: 8pt;
+	text-align: center;
+}
+
+.vote-block {
+	height: 60px;
+}
+
+.vote-block-top {
+	background-position: 0px -265px;
+	background-color: transparent;
+	background-image: url('SO_Sprites.png');
+	cursor: pointer;
+}
+
+.vote-block-bot {
+	background-position: 0px -305px;
+	background-color: transparent;
+	background-image: url('SO_Sprites.png');
+	cursor: pointer;
+}
+
+.vote-sub-block {
+	/* to align, height + border * 2 of sub-block must == height of block */
+	/* border: 1px solid #00f; */
+	height: 20px;
+}
+
+.my-vote-top {
+	background-position: 0px -230px;
+}
+
+.my-vote-bot {
+	background-position: 0px -335px;
+}

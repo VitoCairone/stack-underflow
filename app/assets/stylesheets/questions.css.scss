@@ -39,24 +39,8 @@
 	background: #ecdaec;
 }
 
-.answer-container {
-
-}
-
-.answer-block {
-
-}
-
-
-
-
-
-
-
 
 // OLD CSS below this point
-.index-head {
-}
 
 .index-question-list {
   margin-left: 20%;
@@ -68,12 +52,6 @@
 	a:visited {color:#0050D0; text-decoration: none; } /* visited link */
 	a:hover {color:#0050D0; text-decoration: underline;}   /* mouse over link */
 	a:active {color:#0050D0; text-decoration: underline;}  /* selected link */
-}
-
-.tag-show {
-	background-color: #e0eaf1;
-	border-bottom: 2px solid #b3cee1;
-	border-right: 2px solid #b3cee1;
 }
 
 .index-question-block {
@@ -106,56 +84,21 @@
   border-bottom: 1px solid #aaa;
 }
 
-.vote-cell {
-	width: 45px;
-	font-size: 8pt;
-	text-align: center;
+.show-question-body {
+	border-bottom: 1px solid #aaa;
 }
 
-.vote-block {
-	/* border: 2px solid #f00; */
-	height: 60px;
-	/*
-	background-position: 0px -265px;
-	background-color: transparent;
-	background-image: url('SO_Sprites.png');
-	*/
+.show-question-table {
+	width: 100%;
 }
 
-.vote-block-top {
-	background-position: 0px -265px;
-	background-color: transparent;
-	background-image: url('SO_Sprites.png');
-	cursor: pointer;
-}
-
-.vote-block-bot {
-	background-position: 0px -305px;
-	background-color: transparent;
-	background-image: url('SO_Sprites.png');
-	cursor: pointer;
-}
-
-.vote-sub-block {
-	/* to align, height + border * 2 of sub-block must == height of block */
-	/* border: 1px solid #00f; */
-	height: 20px;
+.question-comment {
+	border-bottom: 1px solid #aaa;
 }
 
 .submit-button {
 	text-align: right;
 }
-
-.tag-show {
-	padding: 2px;
-	margin: 2px;
-	a { color: #000; }
-	a:link { text-decoration: none; }    /* unvisited link */
-	a:visited { text-decoration: none; } /* visited link */
-	a:hover { text-decoration: underline; }   /* mouse over link */
-	a:active { text-decoration: underline; }  /* selected link */
-}
-
 
 .q-stats-block {
 	color: #666;
@@ -206,16 +149,4 @@
 .single-answer {
 	width: 100%;
 	border-bottom: 1px solid #aaa;
-}
-
-.my-vote-top {
-	background-position: 0px -230px;
-	/*background-color: transparent;
-	background-image: url('SO_Sprites.png');*/
-}
-
-.my-vote-bot {
-	background-position: 0px -335px;
-	/*background-color: transparent;
-	background-image: url('SO_Sprites.png');*/
 }

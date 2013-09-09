@@ -84,11 +84,11 @@ window.StackUnderflow = $.extend(window.StackUnderflow || {}, {
 $(document).ready(function () {
 	//var SO = window.StackUnderflow;
 	
-	$(".index-question-block .vote-block-top").on("click", function (event) {
-		window.StackUnderflow.handleVote(event, true, "questions");
+	$(".question-block .vote-block-top").on("click", function (event) {
+		window.StackUnderflow.handleVote(event, true, "../questions");
 	});
-	$(".index-question-block .vote-block-bot").on("click", function (event) {
-		window.StackUnderflow.handleVote(event, false, "questions");
+	$(".question-block .vote-block-bot").on("click", function (event) {
+		window.StackUnderflow.handleVote(event, false, "../questions");
 	})
 	
 	$(".show-answer-container .vote-block-top").on("click", function (event) {

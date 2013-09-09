@@ -17,6 +17,27 @@
 		<!--div class="content-column"-->
 
 			<div class="question-block">
+			<table class="show-question-table">
+			<tr>
+			<td class="vote-cell" valign="top"
+			data-id="<%=@question.id%>">
+				<% my_vote = user_vote_on(@question) %>
+				<div class="vote-block"
+				data-id="<%= my_vote ? my_vote.id : -1 %>">
+					<div class="vote-block-top vote-sub-block
+					<%= my_vote && my_vote.is_up ? " my-vote-top" : ""%>"
+				  >
+					</div>
+					<div class="vote-block-ctr vote-sub-block">
+					<%= @question.rating %>
+					</div>
+					<div class="vote-block-bot vote-sub-block 
+					<%= my_vote && !my_vote.is_up ? " my-vote-bot" : ""%>"
+					>
+					</div>
+				</div>
+			</td>
+			<td>		
 
 				<div class="show-question-author">
 					by <%= @question.user.username %>
@@ -32,11 +53,17 @@
 				</div>
 				<div class="question-comments">
 				  <% @question.comments.each do |comment| %>
+					<div class="question-comment">
 				    <%= comment.body %> by <%= comment.user.username %>
 						<%= render partial: "questions/delete",	locals: { object: comment,
 											 object_url: question_comment_url(@question, comment) } %>
+					</div>
 				  <% end %>
 				</div>
+				
+			</td>
+			</tr>
+			</table>
 
 			</div>
 
