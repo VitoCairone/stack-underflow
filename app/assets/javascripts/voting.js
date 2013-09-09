@@ -1,7 +1,7 @@
 window.StackUnderflow = {
-	handleVote: function (event, for_top) {		
+	handleVote: function (event, for_top, type_str) {		
 		var $target = $(event.target);
-		var qblock = $target.closest(".index-question-block");
+		var qblock = $target.closest(".vote-cell");
 		var	rblock = qblock.find(".vote-block-ctr")
 		var targ_id = parseInt(qblock.data("id"));
 		var $vblock = $target.closest(".vote-block");
@@ -32,7 +32,7 @@ window.StackUnderflow = {
 			//clicking on an existing vote to revoke it
 		
 			$.ajax({
-			    url: '/questions/' + targ_id + '/votes/' + extant_vote_id,
+			    url: type_str + '/' + targ_id + '/votes/' + extant_vote_id,
 			    type: 'DELETE',
 			});
 			rblock.text(parseInt(rblock.text()) - ratingChange);
@@ -43,7 +43,7 @@ window.StackUnderflow = {
 		
 			//first, remove the vote of the opposite type
 			$.ajax({
-			    url: '/questions/' + targ_id + '/votes/' + extant_vote_id,
+			    url: type_str + '/' + targ_id + '/votes/' + extant_vote_id,
 			    type: 'DELETE'
 			});
 			$opposite.removeClass(opp_class_selected_str);
@@ -51,7 +51,7 @@ window.StackUnderflow = {
 			//then, add the vote of this type
 			$target.addClass(selected_class_str);
 			$.post(
-	 			"questions/" + targ_id + "/votes",
+	 			type_str + "/" + targ_id + "/votes",
 	 			{ 
 					is_up: for_top
 				},
@@ -69,7 +69,7 @@ window.StackUnderflow = {
 			$target.addClass(selected_class_str);
 			rblock.text(parseInt(rblock.text()) + ratingChange);
 			$.post(
-	 			"questions/" + targ_id + "/votes",
+	 			type_str + '/' + targ_id + "/votes",
 	 			{
 					is_up: for_top
 				},
@@ -84,11 +84,19 @@ window.StackUnderflow = {
 $(document).ready(function () {
 	//var SO = window.StackUnderflow;
 	
-	$(".vote-block-top").on("click", function (event) {
-		window.StackUnderflow.handleVote(event, true);
+	$(".index-question-block .vote-block-top").on("click", function (event) {
+		window.StackUnderflow.handleVote(event, true, "questions");
 	});
-	$(".vote-block-bot").on("click", function (event) {
-		window.StackUnderflow.handleVote(event, false);
+	$(".index-question-block .vote-block-bot").on("click", function (event) {
+		window.StackUnderflow.handleVote(event, false, "questions");
 	})
+	
+	$(".show-answer-container .vote-block-top").on("click", function (event) {
+		window.StackUnderflow.handleVote(event, true, "../answers");
+	});
+	$(".show-answer-container .vote-block-bot").on("click", function (event) {
+		window.StackUnderflow.handleVote(event, false, "../answers");
+	})
+	
 	
 }); //end doc-ready function

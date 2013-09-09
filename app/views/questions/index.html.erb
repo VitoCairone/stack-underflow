@@ -5,11 +5,11 @@
 
 <div class="index-question-list">
 	<% @questions.each do |question| %>
-		<div class="index-question-block grad-blue" data-id="<%=question.id%>">
+		<div class="index-question-block grad-blue">
 
-	    <table class="answer-table">
+	    <table class="question-table">
 				<tr>
-					<td class="vote-cell" valign="top">
+					<td class="vote-cell" valign="top" data-id="<%=question.id%>">
 						<% my_vote = user_vote_on(question) %>
 						<div class="vote-block" data-id="<%= my_vote ? my_vote.id : -1 %>">
 							<div class="vote-block-top vote-sub-block
