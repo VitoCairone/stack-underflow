@@ -6,9 +6,53 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-// The main pages are the questions show and index pages
-// so just about everything is in this file
+.corridor {
+	margin-left: 15%;
+	margin-right: 15%;
+}
 
+.corridor-table {
+	width: 100%;
+}
+
+.logo-block {
+	background: #000000;
+}
+
+.content-column {
+	width: 80%;
+	background: #eeeeff;
+}
+
+.related-column {
+	background: #edeeee;
+}
+
+.question-block {
+
+}
+
+.tab-bar {
+	height: 30px;
+	background: #ecdaec;
+}
+
+.answer-container {
+
+}
+
+.answer-block {
+
+}
+
+
+
+
+
+
+
+
+// OLD CSS below this point
 .index-head {
 }
 
@@ -28,6 +72,21 @@
 	background-color: #e0eaf1;
 	border-bottom: 2px solid #b3cee1;
 	border-right: 2px solid #b3cee1;
+}
+
+.grad-blue-deprecated {
+	-moz-border-radius: 0px 0px 15px 15px / 0px 0px 15px 15px;
+	border-radius: 0px 0px 15px 15px / 0px 0px 15px 15px;
+
+	/* gradient copypasta from http://www.colorzilla.com/gradient-editor/ */
+	background: rgb(225,255,255); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(225,255,255,1) 0%, rgba(225,255,255,1) 7%, rgba(225,255,255,1) 12%, rgba(253,255,255,1) 12%, rgba(230,248,253,1) 30%, rgba(200,238,251,1) 54%, rgba(190,228,248,1) 75%, rgba(177,216,245,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(225,255,255,1)), color-stop(7%,rgba(225,255,255,1)), color-stop(12%,rgba(225,255,255,1)), color-stop(12%,rgba(253,255,255,1)), color-stop(30%,rgba(230,248,253,1)), color-stop(54%,rgba(200,238,251,1)), color-stop(75%,rgba(190,228,248,1)), color-stop(100%,rgba(177,216,245,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(225,255,255,1) 0%,rgba(225,255,255,1) 7%,rgba(225,255,255,1) 12%,rgba(253,255,255,1) 12%,rgba(230,248,253,1) 30%,rgba(200,238,251,1) 54%,rgba(190,228,248,1) 75%,rgba(177,216,245,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(225,255,255,1) 0%,rgba(225,255,255,1) 7%,rgba(225,255,255,1) 12%,rgba(253,255,255,1) 12%,rgba(230,248,253,1) 30%,rgba(200,238,251,1) 54%,rgba(190,228,248,1) 75%,rgba(177,216,245,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(225,255,255,1) 0%,rgba(225,255,255,1) 7%,rgba(225,255,255,1) 12%,rgba(253,255,255,1) 12%,rgba(230,248,253,1) 30%,rgba(200,238,251,1) 54%,rgba(190,228,248,1) 75%,rgba(177,216,245,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom, rgba(225,255,255,1) 0%,rgba(225,255,255,1) 7%,rgba(225,255,255,1) 12%,rgba(253,255,255,1) 12%,rgba(230,248,253,1) 30%,rgba(200,238,251,1) 54%,rgba(190,228,248,1) 75%,rgba(177,216,245,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1ffff', endColorstr='#b1d8f5',GradientType=0 ); /* IE6-9 */
 }
 
 .index-question-block {
@@ -65,17 +124,33 @@
 }
 
 .vote-block {
-	border: 2px solid #f00;
+	/* border: 2px solid #f00; */
 	height: 60px;
+	/*
 	background-position: 0px -265px;
 	background-color: transparent;
 	background-image: url('SO_Sprites.png');
+	*/
+}
+
+.vote-block-top {
+	background-position: 0px -265px;
+	background-color: transparent;
+	background-image: url('SO_Sprites.png');
+	cursor: pointer;
+}
+
+.vote-block-bot {
+	background-position: 0px -305px;
+	background-color: transparent;
+	background-image: url('SO_Sprites.png');
+	cursor: pointer;
 }
 
 .vote-sub-block {
 	/* to align, height + border * 2 of sub-block must == height of block */
-	border: 1px solid #00f;
-	height: 18px;
+	/* border: 1px solid #00f; */
+	height: 20px;
 }
 
 .submit-button {
@@ -91,12 +166,13 @@
 }
 
 .answer-table {
-	width: 70%;
+	width: 100%;
 	padding-right: 10px;
 }
 
+/* TODO: refactor this! */
 .answer-page-wmd {
-	width: 70%;
+	width: 60%;
 	padding-right: 10px;
 }
 
@@ -111,4 +187,16 @@
 .single-answer {
 	width: 100%;
 	border-bottom: 1px solid #aaa;
+}
+
+.my-vote-top {
+	background-position: 0px -230px;
+	/*background-color: transparent;
+	background-image: url('SO_Sprites.png');*/
+}
+
+.my-vote-bot {
+	background-position: 0px -335px;
+	/*background-color: transparent;
+	background-image: url('SO_Sprites.png');*/
 }

@@ -22,4 +22,5 @@ class Answer < ActiveRecord::Base
     upcount = upvotes
     2 * upcount - @votes.length
   end
+  
 end

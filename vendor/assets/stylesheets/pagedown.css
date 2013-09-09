@@ -1,11 +1,11 @@
 /* Minor modifications made for current project */
 /* Original from https://code.google.com/p/pagedown/wiki/PageDown */
 
-body
+/*body
 {
 	background-color: White;
     font-family: sans-serif;
-}
+}*/
 
 blockquote {
 	border-left: 2px dotted #888;

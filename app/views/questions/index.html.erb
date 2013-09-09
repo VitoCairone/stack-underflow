@@ -5,20 +5,21 @@
 
 <div class="index-question-list">
 	<% @questions.each do |question| %>
-		<div class="index-question-block">
+		<div class="index-question-block grad-blue" data-id="<%=question.id%>">
 
 	    <table class="answer-table">
 				<tr>
 					<td class="vote-cell" valign="top">
-						<div class="vote-block">
-							<div class="vote-block-top vote-sub-block">
-							<%= link_to "GWAR", question_votes_url(question, :is_up => true), method: :post %>
+						<% my_vote = user_vote_on(question) %>
+						<div class="vote-block" data-id="<%= my_vote ? my_vote.id : -1 %>">
+							<div class="vote-block-top vote-sub-block
+							<%= my_vote && my_vote.is_up ? " my-vote-top" : ""%>" >
 							</div>
 							<div class="vote-block-ctr vote-sub-block">
 							<%= question.rating %>
 							</div>
-							<div class="vote-block-bot vote-sub-block">
-							<%= link_to "GWAR", question_votes_url(question, :is_up => false), method: :post %>
+							<div class="vote-block-bot vote-sub-block 
+							<%= my_vote && !my_vote.is_up ? " my-vote-bot" : ""%>" >
 							</div>
 						</div>
 					</td>
@@ -119,6 +120,8 @@
 
 			var user_text = converter.makeHtml($("#wmd-input").val());
 
+			//send only a unique list of tags when tags are redundant
+			//TODO: make redundant tags unselectable
 			var tag_ids_arr = [];
 			for (var i = 0; i <= 4; i++) {
 				var tag_id = $("#question-tag-ids-" + i).val();
@@ -154,6 +157,7 @@
 				}
 			});
 		});
+		
 		$(".question-tag-select").prop("selectedIndex", -1);
 
 		//This unhides subsequent tag selectors when a tag is selected.

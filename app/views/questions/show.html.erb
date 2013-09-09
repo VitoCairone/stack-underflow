@@ -1,99 +1,185 @@
 <div class="show-question-master">
+	<div class="corridor">
 
-	<div class="show-question-title" id="question-title-<%=@question.id%>">
-		<!-- Not a header tag because headers insert an extra blank line -->
-		<big><big><b>
-	  <%= @question.title %>
-		</big></big></b>
-	</div>
+		<div class="logo-block">
+		</div>
 
-	<div class="show-question-author">
-		by <%= @question.user.username %>
-	</div>
-	<div class="show-question-body" id="question-body-<%=@question.id%>">
-		<!-- TODO: fix this -->
-		<%= @question.body.html_safe %>
-		<%= render partial: "questions/delete",	locals: { object: @question,
-							 object_url: question_url(@question) } %>
-		<small><small>
-			[<%= link_to "comment", new_question_comment_url(@question) %>]
-		</small></small>
-	</div>
-	<div class="question-comments">
-	  <% @question.comments.each do |comment| %>
-	    <%= comment.body %> by <%= comment.user.username %>
-			<%= render partial: "questions/delete",	locals: { object: comment,
-								 object_url: question_comment_url(@question, comment) } %>
-	  <% end %>
-	<div>
+		<table class="corridor-table">
+		<tr class="question-title">
+			<div class="show-question-title" id="question-title-<%=@question.id%>">
+				<!-- Not a header tag because headers insert an extra blank line -->
+				<big><big><b>
+			  <%= @question.title %>
+				</big></big></b>
+			</div>
+		</tr>
+		<td class="content-column">
+		<!--div class="content-column"-->
 
-	<br><br>
+			<div class="question-block">
 
-	<% if @answers %>
-    <div class="show-answer-count">
-	    <big><b><%= @answers.length %> Answers</b></big>
-	  </div>
-		  <% @answers.each do |answer| %>
+				<div class="show-question-author">
+					by <%= @question.user.username %>
+				</div>
+				<div class="show-question-body" id="question-body-<%=@question.id%>">
+					<!-- TODO: fix this -->
+					<%= @question.body.html_safe %>
+					<%= render partial: "questions/delete",	locals: { object: @question,
+										 object_url: question_url(@question) } %>
+					<small><small>
+						[<%= link_to "comment", new_question_comment_url(@question) %>]
+					</small></small>
+				</div>
+				<div class="question-comments">
+				  <% @question.comments.each do |comment| %>
+				    <%= comment.body %> by <%= comment.user.username %>
+						<%= render partial: "questions/delete",	locals: { object: comment,
+											 object_url: question_comment_url(@question, comment) } %>
+				  <% end %>
+				</div>
+
+			</div>
+
+			<div class="tab-bar">
+			</div>
+
 			<div class="answer-container">
-		    <table class="answer-table">
-					<tr>
-						<td class="vote-cell" valign="top">
-							<%= link_to "/\\", answer_votes_url(answer, :is_up => true), method: :post %>
-							<br>
-							<%= answer.rating %>
-							<br>
-							<%= link_to "\\/", answer_votes_url(answer, :is_up => false), method: :post %>
-						</td>
-						<td>
-							<div class="single-answer">
-								<!-- TODO: fix this -->
-						    <%= answer.body.html_safe %>
+				<div class="answer-block">
 
-								<br><small>Answered by <%= answer.user.username %></small>
-								<%= render partial: "questions/delete", locals: { object: answer,
-													 object_url: question_answer_url(@question, answer) } %>
-								<small><small>
-						    	[<%= link_to "comment", new_answer_comment_url(answer) %>]
-								</small></small>
-							</div>
+					<% if @answers %>
+				    <div class="show-answer-count">
+					    <big><b><%= @answers.length %> Answers</b></big>
+					  </div>
+						  <% @answers.each do |answer| %>
+								<div class="show-answer-container grad-blue"> <!-- rename/remove -->
+							    <table class="answer-table">
+										<tr>
+											<td class="vote-cell" valign="top">
+												<div class="vote-block">
+													<div class="vote-block-top vote-sub-block">
+													</div>
+													<div class="vote-block-ctr vote-sub-block">
+													<%= answer.rating %>
+													</div>
+													<div class="vote-block-bot vote-sub-block">
+													</div>
+												</div>
+											</td>
+											<td>
+												<div class="single-answer">
+													<!-- TODO: fix this -->
+											    <%= answer.body.html_safe %>
+													<br><small>Answered by <%= answer.user.username %></small>
+													<%= render partial: "questions/delete", locals: { object: answer,
+																		 object_url: question_answer_url(@question, answer) } %>
+													<small><small>
+											    	[<%= link_to "comment", new_answer_comment_url(answer) %>]
+													</small></small>
+												</div>
+										    <div class="answer-comments">
+										      <% answer.comments.each do |comment| %>
+													<div class="single-answer-comment">
+										        <%= comment.body %>
+														<br><small><small>
+															by <%= comment.user.username %>
+														</small></small>
+														<%= render partial: "questions/delete",	locals: { object: comment,
+																			 object_url: answer_comment_url(answer, comment) } %>
+													</div>
+										      <% end %>
+										    </div>
+											</td>
+										</tr>
+									</table>
+								</div> <!-- show-answer-container; rename/remove this -->
+						  <% end %>
+					<% end %>
 
-					    <div class="answer-comments">
-					      <% answer.comments.each do |comment| %>
-								<div class="single-answer-comment">
+				</div> <!-- answer-block -->
+			</div> <!-- answer-container -->
 
-					        <%= comment.body %>
-									<br><small><small>
-										by <%= comment.user.username %>
-									</small></small>
-									<%= render partial: "questions/delete",	locals: { object: comment,
-														 object_url: answer_comment_url(answer, comment) } %>
-								</div>
-					      <% end %>
-					    </div>
-						</td>
-					</tr>
-				</table>
+			<a name="answer"></a>
+			<div class="answer-page-wmd">
+				<br>
+				<div class="wmd-panel submit-button">
+					<button id="new_answer_button">Submit Answer</button>
+				</div>
+				<div class="wmd-panel">
+				<div id="wmd-button-bar"></div>
+				<textarea class="wmd-input" id="wmd-input"></textarea>
+				</div>
+				<div class="wmd-panel" id="preview-label">
+				Preview:
+				</div>
+				<div id="wmd-preview" class="wmd-panel wmd-preview">
+				</div>
+			</div>
 
+		<!--/div--> <!-- content-column -->
+		</td><td class="related-column" valign="top">
+		<!--div class="related-column"-->
 
-			</div><!--answer-container-->
-		  <% end %>
-	<% end %>
+		<% if (tags = @question.tags) %>
+			<% tags.each do |tag| %>
+				<span class="tag-show"><%= tag.name%></span><br>
+			<% end %>
+		<% end %>
 
-	<a name="answer"></a>
-	<div class="answer-page-wmd">
-		<div class="wmd-panel submit-button">
-			<button id="new_answer_button">Submit Answer</button>
-		</div>
-		<div class="wmd-panel">
-		<div id="wmd-button-bar"></div>
-		<textarea class="wmd-input" id="wmd-input"></textarea>
-		</div>
-		<div class="wmd-panel" id="preview-label">
-		Preview:
-		</div>
-		<div id="wmd-preview" class="wmd-panel wmd-preview">
-		</div>
+		<!--/div-->
+		</td></tr></table>
 	</div>
+</div>
+
+
+	<script>
+	//TODO: DRY (i.e., remove from page)
+
+	$(document).ready(function () {
+		// // a variation on this logic would allow in-place deletion
+		// // with the request firing in the background and rendered by JavaScript
+		// // without an actual page reload
+		// $("a.delete-question").on("click", function (event) {
+		// 	//is this the best way to do this...?
+		// 	var targ_attrs = { id: parseInt($(event.target).data("id")) }
+		// 	var targ_model = this.questions.findWhere(targ_attrs)
+		// 	targ_model.destroy({
+		// 		success: function () {
+		// 			console.log("Removed Question");
+		// 			$(event.target).closest(".index-question-block").remove();
+		// 		},
+		// 		error: function () {
+		// 			console.log("Error from deleteQuestion")
+		// 		}
+		// 	});
+		// });
+
+		$(".vote-block-top").on("click", function (event) {
+			var qblock = $(event.target).closest(".answer-container");
+			var targ_id = parseInt(qblock.data("id"));
+			console.log("upVote!");
+			rblock = qblock.find(".vote-block-ctr")
+			rblock.text(parseInt(rblock.text()) + 1);
+			$.post(
+	 			"answers/" + targ_id + "/votes",
+	 			{ is_up: true }
+				//Does NOT trigger success/error callbacks ??
+	 		);
+		});
+
+		$(".vote-block-bot").on("click", function (event) {
+			var qblock = $(event.target).closest(".answer-container");
+			var targ_id = parseInt(qblock.data("id"));
+			console.log("downVote!");
+			rblock = qblock.find(".vote-block-ctr")
+			rblock.text(parseInt(rblock.text()) - 1);
+			 $.post(
+	 			"answers/" + targ_id + "/votes",
+	 			{ is_up: false }
+				//Does NOT trigger success/error callbacks ??
+	 		);
+		});
+	});
+	</script>
 
 	<script type="text/javascript">
 	  (function () {
@@ -139,5 +225,3 @@
 			});
 		});
 	</script>
-
-</div>

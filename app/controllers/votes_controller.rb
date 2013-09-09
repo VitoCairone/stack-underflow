@@ -16,13 +16,14 @@ class VotesController < ApplicationController
     #Actually save the vote
     @vote = Vote.new(params[:vote])
     if @vote.save
-      redirect_to :back
+      render json: @vote
     else
       render_errors_of @vote
     end
   end
 
   def destroy
+    p "Attempting to destroy Vote #{params[:id]}"
     destroy_this Vote
   end
 end

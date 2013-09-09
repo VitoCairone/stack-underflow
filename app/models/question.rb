@@ -22,4 +22,11 @@ class Question < ActiveRecord::Base
     upcount = upvotes
     2 * upcount - @votes.length
   end
+  
+  def vote_of_current_user
+    return nil unless logged_in?
+    @votes ||= self.votes
+    idx = @votes.index {|vote| vote.user_id == current_user.id}
+    idx ? @votes[idx] : nil
+  end 
 end
