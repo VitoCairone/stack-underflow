@@ -3,54 +3,7 @@
 <hr>
 </div>
 
-<div class="index-question-list">
-	<% @questions.each do |question| %>
-		<div class="index-question-block grad-blue">
-
-	    <table class="question-table">
-				<tr>
-					<td class="vote-cell" valign="top" data-id="<%=question.id%>">
-						<% my_vote = user_vote_on(question) %>
-						<div class="vote-block" data-id="<%= my_vote ? my_vote.id : -1 %>">
-							<div class="vote-block-top vote-sub-block
-							<%= my_vote && my_vote.is_up ? " my-vote-top" : ""%>" >
-							</div>
-							<div class="vote-block-ctr vote-sub-block">
-							<%= question.rating %>
-							</div>
-							<div class="vote-block-bot vote-sub-block 
-							<%= my_vote && !my_vote.is_up ? " my-vote-bot" : ""%>" >
-							</div>
-						</div>
-					</td>
-					<td>
-					  <div class="index-question-title" id="question-title-<%=question.id%>">
-					    <h2>
-					      <%= link_to question.title, question_url(question) %>
-								<%= render partial: "questions/delete", locals: { object: question,
-													 object_url: question_url(question) } %>
-					    </h2>
-					  </div>
-					  <div class="index-question-body" id="question-body-<%=question.id%>">
-							<!-- TODO: fix this -->
-					    <%= question.body.html_safe %>
-					  </div>
-						<div class="index-question-tags" id="question-tags-<%=question.id%>">
-							<% if (tags = question.tags) %>
-							  <% tags.each do |tag| %>
-								<span class="tag-show"><%=tag.name%></span>
-								<% end %>
-							<% end %>
-						</div>
-					  <div class="index-answer-count">
-					    <small><b><%= question.answers.length %> anwers </b></small>
-					  </div>
-					</td>
-				</tr>
-			</table>
-		</div>
-	<% end %>
-</div>
+<%= render "questions/list" %>
 
 <!-- consider replacing with https://github.com/derobins/wmd/tree/master -->
 <a name="ask"></a>

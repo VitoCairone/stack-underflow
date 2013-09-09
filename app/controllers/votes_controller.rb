@@ -23,7 +23,14 @@ class VotesController < ApplicationController
   end
 
   def destroy
-    p "Attempting to destroy Vote #{params[:id]}"
-    destroy_this Vote
+    @vote = Vote.find(params[:id])
+    if @vote
+      #TODO: fail non-owned destroy more loudly
+      @vote.destroy if owned(@vote)
+      render json: @object, status: 200
+    else
+      render_errors_of @object
+    end
   end
+  
 end

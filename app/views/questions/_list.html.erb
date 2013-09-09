@@ -1,0 +1,55 @@
+<div class="index-question-list">
+	<% @questions.each do |question| %>
+		<div class="index-question-block grad-blue">
+
+	    <table class="question-table">
+				<tr>
+					<td class="q-stats-cell"
+					valign="top" align="center" data-id="<%=question.id%>">
+						<div class="q-stats-block">
+							<div class="rating-block">
+								<div class="rating-num"><%= question.rating %></div>
+								<div class="votes-literal">votes</div>
+							</div>
+							<div class="answer-count-block">
+								<div class="answers-num"><%= question.answers.length %></div>
+								<div class="answers-literal">answers</div>
+							</div>
+						</div>
+					</td>
+					<td>
+					  <div class="index-question-title" id="question-title-<%=question.id%>">
+					    <h2>
+					      <%= link_to question.title, question_url(question) %>
+								<%= render partial: "questions/delete", locals: { object: question,
+													 object_url: question_url(question) } %>
+					    </h2>
+					  </div>
+					  <div class="index-question-body"
+						id="question-body-<%=question.id%>">
+							<!-- TODO: fix this -->
+							<% question_body = strip_tags(question.body.html_safe) %>
+							<% if question_body.length > 160 %>
+								<!-- TODO: break slightly more elegantly, -->
+								<!-- i.e., prefer the end of a word -->
+								<%= question_body[0..160] %> ...
+							<% else %>
+								<%= question_body %>
+							<% end %>
+					  </div>
+						<div class="index-question-tags"
+						id="question-tags-<%= question.id %>">
+							<% if (tags = question.tags) %>
+							  <% tags.each do |tag| %>
+								<span class="tag-show" data-id="<%= tag.id %>">
+									<a href="<%= tag_url(tag) %>"><%= tag.name %></a>
+								</span>
+								<% end %>
+							<% end %>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	<% end %>
+</div>

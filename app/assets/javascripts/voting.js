@@ -1,4 +1,4 @@
-window.StackUnderflow = {
+window.StackUnderflow = $.extend(window.StackUnderflow || {}, {
 	handleVote: function (event, for_top, type_str) {		
 		var $target = $(event.target);
 		var qblock = $target.closest(".vote-cell");
@@ -79,7 +79,7 @@ window.StackUnderflow = {
 	 		);
 		}
 	} // end handleVote function
-}
+}); //end StackUnderflow assign/extend
 
 $(document).ready(function () {
 	//var SO = window.StackUnderflow;
@@ -97,6 +97,5 @@ $(document).ready(function () {
 	$(".show-answer-container .vote-block-bot").on("click", function (event) {
 		window.StackUnderflow.handleVote(event, false, "../answers");
 	})
-	
 	
 }); //end doc-ready function

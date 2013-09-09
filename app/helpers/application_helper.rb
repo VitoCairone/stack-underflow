@@ -20,12 +20,12 @@ module ApplicationHelper
     if @object
       #TODO: fail non-owned destroy more loudly
       @object.destroy if owned(@object)
-      render json: @object
-#       if klass == Question #in this case :back may no longer exist
-#         redirect_to home_url
-#       else
-#         redirect_to :back
-#       end
+      #render json: @object
+      if klass == Question #in this case :back may no longer exist
+        redirect_to home_url
+      else
+        redirect_to :back
+      end
     else
       render_errors_of @object
     end

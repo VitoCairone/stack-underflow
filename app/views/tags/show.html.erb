@@ -1,10 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @tag.name %>
-</p>
+<% @questions = @tag.questions %>
+<div class="index-head">
+<h1>Questions tagged <%= @tag.name.capitalize %>: <%= @questions.length %></h1>
+<hr>
+</div>
 
+<%= render "questions/list" %>
 
-<%= link_to 'Edit', edit_tag_path(@tag) %> |
-<%= link_to 'Back', tags_path %>
+<%= link_to 'Tags Index', tags_path %>
