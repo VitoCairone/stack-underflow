@@ -39,6 +39,15 @@
 	background: #ecdaec;
 }
 
+/* required for asker-block to properly align to the right */
+.q-content-cell {
+	width: 100%;
+}
+
+.asker-block {
+	width: 100%;
+	text-align: right;
+}
 
 // OLD CSS below this point
 
@@ -125,28 +134,4 @@
 
 #question_title {
 	width: 100%;
-}
-
-.answer-table {
-	width: 100%;
-	padding-right: 10px;
-}
-
-/* TODO: refactor this! */
-.answer-page-wmd {
-	width: 60%;
-	padding-right: 10px;
-}
-
-.answer-comments {
-	margin-left: 30px;
-}
-
-.single-answer-comment {
-	border-bottom: 1px solid #aaa;
-}
-
-.single-answer {
-	width: 100%;
-	border-bottom: 1px solid #aaa;
 }

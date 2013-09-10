@@ -38,10 +38,6 @@
 				</div>
 			</td>
 			<td>		
-
-				<div class="show-question-author">
-					by <%= @question.user.username %>
-				</div>
 				<div class="show-question-body" id="question-body-<%=@question.id%>">
 					<!-- TODO: fix this -->
 					<%= @question.body.html_safe %>
@@ -50,7 +46,14 @@
 					<small><small>
 						[<%= link_to "comment", new_question_comment_url(@question) %>]
 					</small></small>
+					
+					<div class="asker-block">
+						<% ask_time = @question.created_at.localtime %>
+						asked <%= ask_time.strftime("%b %e at %l:%M %P") %>
+						by <%= @question.user.username %>
+					</div>
 				</div>
+				
 				<div class="question-comments">
 				  <% @question.comments.each do |comment| %>
 					<div class="question-comment">

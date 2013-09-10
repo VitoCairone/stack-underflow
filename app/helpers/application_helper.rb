@@ -86,4 +86,5 @@ module ApplicationHelper
     idx = votes.index {|vote| vote.user_id == current_user.id}
     idx ? votes[idx] : nil
   end 
+
 end

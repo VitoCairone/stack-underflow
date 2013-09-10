@@ -17,7 +17,7 @@
 							</div>
 						</div>
 					</td>
-					<td>
+					<td class="q-content-cell">
 					  <div class="index-question-title" id="question-title-<%=question.id%>">
 					    <h2>
 					      <%= link_to question.title, question_url(question) %>
@@ -37,6 +37,13 @@
 								<%= question_body %>
 							<% end %>
 					  </div>
+						
+						<div class="asker-block">
+							<% ask_time = question.created_at.localtime %>
+							asked <%= ask_time.strftime("%b %e at %l:%M %P") %>
+							by <%= question.user.username %>
+						</div>
+						
 						<div class="index-question-tags"
 						id="question-tags-<%= question.id %>">
 							<% if (tags = question.tags) %>
