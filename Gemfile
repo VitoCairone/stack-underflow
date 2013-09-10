@@ -30,6 +30,8 @@ end
 gem 'jquery-rails'
 gem 'webrick', '~> 1.3.1'
 
+gem 'koala', '~> 1.7.0rc1'
+
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
 
