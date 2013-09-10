@@ -18,7 +18,8 @@
 						</div>
 					</td>
 					<td class="q-content-cell">
-					  <div class="index-question-title" id="question-title-<%=question.id%>">
+					  <div class="index-question-title" 
+						id="question-title-<%=question.id%>">
 					    <h2>
 					      <%= link_to question.title, question_url(question) %>
 								<%= render partial: "questions/delete", locals: { object: question,

@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
   before_filter :enforce_logged_in, except: [:index, :show]
 
   def index
-    @questions = Question.includes(:answers)
+    @questions = Question.includes(:answers, :user, :votes, :tags)
     @questions = @questions.sort_by{ |question| -question.rating }
     render :index
   end

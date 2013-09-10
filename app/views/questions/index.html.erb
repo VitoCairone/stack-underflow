@@ -7,9 +7,6 @@
 
 <!-- consider replacing with https://github.com/derobins/wmd/tree/master -->
 <a name="ask"></a>
-<div class="wmd-panel submit-button">
-	<button id="new_question_button">Submit Question</button>
-</div>
 <div class="wmd-panel" id="title-input">
 	<label for="question_title">Title</label>
 	<br><input type="text" name="question[title]" id="question_title">
@@ -45,28 +42,34 @@
 	<% end %>
 </select>
 <% end %>
+</div>
 
+<div class="wmd-panel submit-button">
+	<button id="new_question_button">Submit Question</button>
 </div>
 
 <!-- TODO: pull these scripts out -->
 <script type="text/javascript">
-  (function () {
-      var converter1 = Markdown.getSanitizingConverter();
 
-			//fenced block-quote ("""  """) plugin
-      converter1.hooks.chain("preBlockGamut", function (text, rbg) {
-          return text.replace(/^ {0,3}""" *\n((?:.*?\n)+?) {0,3}""" *$/gm, function (whole, inner) {
-              return "<blockquote>" + rbg(inner) + "</blockquote>\n";
-          });
-      });
-
-      var editor1 = new Markdown.Editor(converter1);
-
-      editor1.run();
-  })();
-
-	//
 	$(document).ready(function() {
+		
+		//Note that this first block also works outside the on-docready callback
+	  (function () {
+	      var converter1 = Markdown.getSanitizingConverter();
+
+				//fenced block-quote ("""  """) plugin
+	      converter1.hooks.chain("preBlockGamut", function (text, rbg) {
+	          return text.replace(/^ {0,3}""" *\n((?:.*?\n)+?) {0,3}""" *$/gm, function (whole, inner) {
+	              return "<blockquote>" + rbg(inner) + "</blockquote>\n";
+	          });
+	      });
+
+	      var editor1 = new Markdown.Editor(converter1);
+
+	      editor1.run();
+	  })();
+		//End first block
+		
 		$('#new_question_button').on("click", function(event) {
 			event.preventDefault();
 			var converter = Markdown.getSanitizingConverter();
