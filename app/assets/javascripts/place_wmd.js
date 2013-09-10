@@ -121,7 +121,7 @@ $(document).ready(function() {
 						+ '<button id="new_comment_button">'
 						+ 'Submit Comments</button></div><div class="wmd-panel">'
 						+ '<div id="wmd-button-bar' + suffix + '"></div>'
-						+ '<textarea class="wmd-input" id="wmd-input' + suffix + '">'
+						+ '<textarea class="wmd-input wmd-shorty" id="wmd-input' + suffix + '">'
 						+ '</textarea></div><div class="wmd-panel" id="preview-label">'
 						+ 'Preview: </div><div id="wmd-preview' + suffix + '"'
 						+ ' class="wmd-panel wmd-preview">'

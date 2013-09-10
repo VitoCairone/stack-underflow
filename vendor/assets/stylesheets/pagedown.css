@@ -35,6 +35,11 @@ blockquote {
 	border: 1px solid DarkGray;
 }
 
+.wmd-shorty
+{
+	height: 50px;
+}
+
 .wmd-preview
 {
 	/* TODO: eliminate extra padding at the top when text exists */

@@ -64,7 +64,7 @@
 				<div class="question-comments">
 				  <% @question.comments.each do |comment| %>
 					<div class="question-comment">
-				    <%= comment.body %> by <%= comment.user.username %>
+				    <%= comment.body.html_safe %> by <%= comment.user.username %>
 						<%= render partial: "questions/delete",	locals: { object: comment,
 											 object_url: question_comment_url(@question, comment) } %>
 					</div>
@@ -136,7 +136,7 @@
 										    <div class="answer-comments">
 										      <% answer.comments.each do |comment| %>
 													<div class="single-answer-comment">
-										        <%= comment.body %>
+										        <%= comment.body.html_safe %>
 														<br><small><small>
 															by <%= comment.user.username %>
 														</small></small>
