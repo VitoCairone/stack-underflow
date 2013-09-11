@@ -33,7 +33,13 @@ class QuestionsController < ApplicationController
     ).find(params[:id])
 
     if @question
-      @answers = @question.answers.sort_by{ |answer| -answer.rating }
+      # Here, we sort answers by negative rating so that the highest
+      # rated appear closest to the top. We could explicitly pull out the
+      # accepted answer and then reassamble the list with it first, but it's
+      # much simpler to just give it a huge effective rating.
+      @answers = @question.answers.sort_by do |answer|
+        answer.id == @question.best_answer_id ? -2_000_000_000 : -answer.rating 
+      end
       render :show
     else
       render text: "Question #{params[:id]} not found", status: 404
@@ -42,5 +48,16 @@ class QuestionsController < ApplicationController
 
   def new
     render :new
+  end
+  
+  def update
+    @question = Question.find(params[:id])
+
+    if @question && @question.update_attributes(params[:question])
+      render json: @question
+    else
+      render_errors_of @question
+    end
+    
   end
 end

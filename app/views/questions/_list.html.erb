@@ -11,8 +11,14 @@
 								<div class="rating-num"><%= question.rating %></div>
 								<div class="votes-literal">votes</div>
 							</div>
-							<div class="answer-count-block">
-								<div class="answers-num"><%= question.answers.length %></div>
+							<% acount = question.answers.length %>
+							<% answer_classes = "answer-count-block" %>
+							<% if question.best_answer_id == -1 %>
+								<% answer_classes += " acb-none-picked" %>
+							<% end %>
+							<% answer_classes += " acb-zero" if acount == 0%>
+							<div class="<%= answer_classes %>">
+								<div class="answers-num"><%= acount %></div>
 								<div class="answers-literal">answers</div>
 							</div>
 						</div>

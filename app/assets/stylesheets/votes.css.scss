@@ -27,8 +27,6 @@
 }
 
 .vote-sub-block {
-	/* to align, height + border * 2 of sub-block must == height of block */
-	/* border: 1px solid #00f; */
 	height: 20px;
 }
 
@@ -38,4 +36,23 @@
 
 .my-vote-bot {
 	background-position: 0px -335px;
+}
+
+.accept-block {
+	height: 50px;
+	background-color: transparent;
+	background-image: url('SO_Sprites.png');
+	background-position: 0px -565px;
+	cursor: pointer;
+}
+
+.accepted-block {
+	height: 50px;
+	background-color: transparent;
+	background-image: url('SO_Sprites.png');
+	background-position: 0px -465px;
+}
+
+.accept-block-dummy {
+	height: 50px;
 }

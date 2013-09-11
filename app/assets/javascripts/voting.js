@@ -98,4 +98,18 @@ $(document).ready(function () {
 		window.StackUnderflow.handleVote(event, false, "../answers");
 	})
 	
+	$(".accept-block").on("click", function (event) {
+		var $target = $(event.target);
+		var ablock = $target.closest(".vote-cell");
+		var qblock = $target.closest(".answer-block")
+		var targ_answer_id = parseInt(ablock.data("id"));
+		var targ_question_id = parseInt(qblock.data("id"));
+		$.ajax({
+		    url: '../questions/' + targ_question_id,
+				data: { question: { best_answer_id: targ_answer_id } },
+		    type: 'PUT',
+				success: function () { location.reload() }
+		});
+	});
+	
 }); //end doc-ready function

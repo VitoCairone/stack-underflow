@@ -81,7 +81,7 @@
 			</div>
 
 			<div class="answer-container">
-				<div class="answer-block">
+				<div class="answer-block" data-id="<%=@question.id%>">
 
 					<% if @answers %>
 				    <div class="show-answer-count">
@@ -107,6 +107,8 @@
 													<%= my_vote && !my_vote.is_up ? " my-vote-bot" : ""%>"
 													>
 													</div>
+												</div>
+												<div class="<%= accept_block_class(answer) %>">
 												</div>
 											</td>
 											
