@@ -10,51 +10,10 @@
 			</div>
 		</tr>
 		<tr>
+			
 			<td class="content-column">
 				<div class="question-block">
-					<table class="show-question-table">
-						<tr>
-							<td class="vote-cell" valign="top" data-id="<%=@question.id%>">
-								<% my_vote = user_vote_on(@question) %>
-								<div class="vote-block" data-id="<%= my_vote ? my_vote.id : -1 %>">
-									<div class="vote-block-top vote-sub-block <%= my_vote && my_vote.is_up ? " my-vote-top" : ""%>">
-									</div>
-									<div class="vote-block-ctr vote-sub-block">
-										<%= @question.rating %>
-									</div>
-									<div class="vote-block-bot vote-sub-block <%= my_vote && !my_vote.is_up ? " my-vote-bot" : ""%>">
-									</div>
-								</div>
-							</td>
-							<td>		
-								<div class="show-question-body" id="question-body-<%=@question.id%>">
-									<!-- TODO: fix this -->
-									<%= @question.body.html_safe %>
-									<%= render partial: "questions/delete",	locals: { object: @question, object_url: question_url(@question) } %>
-									[
-									<a href="#" class="comment-link" id="comment-q-<%=@question.id%>" data-action="<%= question_comments_url(@question) %>">
-										comment
-									</a>
-									]
-									<div class="asker-block">
-										<% ask_time = @question.created_at.localtime %>
-										asked <%= ask_time.strftime("%b %e at %l:%M %P") %>
-										by <%= @question.user.username %>
-									</div>
-								</div>
-			
-								<div class="question-comments">
-					  			<% @question.comments.each do |comment| %>
-										<div class="question-comment">
-					    				<%= comment.body.html_safe %> by <%= comment.user.username %>
-											<%= render partial: "questions/delete",	locals: { object: comment, object_url: question_comment_url(@question, comment) } %>
-										</div>
-					  			<% end %>
-								</div>
-			
-							</td>
-						</tr>
-					</table>
+					<%= render "questions/show_question" %>
 				</div> <!-- /question-block -->
 
 				<div class="tab-bar">
@@ -69,52 +28,12 @@
 						  </div>
 							<% @answers.each do |answer| %>
 								<div class="show-answer-container"> <!-- rename/remove? -->
-									<table class="answer-table">
-										<tr>
-											<td class="vote-cell" valign="top" data-id="<%=answer.id%>">
-												<% my_vote = user_vote_on(answer) %>
-												<div class="vote-block" data-id="<%= my_vote ? my_vote.id : -1 %>">
-													<div class="vote-block-top vote-sub-block <%= my_vote && my_vote.is_up ? " my-vote-top" : ""%>">
-													</div>
-													<div class="vote-block-ctr vote-sub-block">
-														<%= answer.rating %>
-													</div>
-													<div class="vote-block-bot vote-sub-block <%= my_vote && !my_vote.is_up ? " my-vote-bot" : ""%>">
-													</div>
-												</div>
-												<div class="<%= accept_block_class(answer) %>">
-												</div>
-											</td>
-										
-											<td>
-												<div class="single-answer">
-													<!-- TODO: fix this -->
-												  <%= answer.body.html_safe %>
-													Answered by <%= answer.user.username %>
-													<%= render partial: "questions/delete", locals: { object: answer, object_url: question_answer_url(@question, answer) } %>
-													[
-													<a href="#" class="comment-link" id="comment-a-<%=answer.id%>" data-action="<%= answer_comments_url(answer) %>">
-														comment
-													</a>
-													]
-												</div>
-											  <div class="answer-comments">
-											    <% answer.comments.each do |comment| %>
-														<div class="single-answer-comment">
-											        <%= comment.body.html_safe %>  
-															by <%= comment.user.username %>
-															<%= render partial: "questions/delete", locals: { object: comment, object_url: answer_comment_url(answer, comment) } %>
-														</div>
-											    <% end %>
-											  </div>
-											</td>
-										</tr>
-									</table>
-								</div> <!-- /show-answer-container -->
+									<%= render "questions/show_answer", answer: answer %>
+								</div>
 							<% end %>
 						<% end %>
-					</div> <!-- /answer-block -->
-				</div> <!-- /answer-container -->
+					</div>
+				</div>
 
 				<a name="answer">
 				</a>
@@ -125,20 +44,10 @@
 							Submit Answer
 						</button>
 					</div>
-					<div class="wmd-panel">
-						<div id="wmd-button-bar">
-						</div>
-						<textarea class="wmd-input" id="wmd-input">
-						</textarea>
-					</div>
-					<div class="wmd-panel" id="preview-label">
-						Preview:
-					</div>
-					<div id="wmd-preview" class="wmd-panel wmd-preview">
-					</div>
+					<%= render "questions/wmd_core" %>
 				</div>
-
 			</td> <!-- /content-column -->
+			
 			<td class="related-column" valign="top">
 				<% if (tags = @question.tags) %>
 					<% tags.each do |tag| %>
@@ -149,6 +58,7 @@
 					<% end %>
 				<% end %>
 			</td>
+			
 		</tr>
 	</table> <!-- /corridor-table -->
 </div> <!-- /corridor -->

@@ -5,6 +5,10 @@
 	    <table class="question-table">
 				<tr>
 					<td class="q-stats-cell" valign="top" align="center" data-id="<%=question.id%>">
+						
+						<!-- This cell shows the rating and number of answers
+							   with conditional classes depending on whether there are
+								 any answers and whether there is a best answer --> 
 						<div class="q-stats-block">
 							<div class="rating-block">
 								<div class="rating-num">
@@ -14,29 +18,31 @@
 									votes
 								</div>
 							</div>
-							<% acount = question.answers.length %>
+							<% ans_count = question.answers.length %>
 							<% answer_classes = "answer-count-block" %>
 							<% if question.best_answer_id == -1 %>
 								<% answer_classes += " acb-none-picked" %>
 							<% end %>
-							<% answer_classes += " acb-zero" if acount == 0%>
+							<% answer_classes += " acb-zero" if ans_count == 0 %>
 							<div class="<%= answer_classes %>">
 								<div class="answers-num">
-									<%= acount %>
+									<%= ans_count %>
 								</div>
 								<div class="answers-literal">
 									answers
 								</div>
 							</div>
-						</div> <!-- /q-stats-block -->
+						</div>
+						
 					</td>
 					<td class="q-content-cell">
+						
+						<!-- This cell holds the question title and body -->
 					  <div class="index-question-title" id="question-title-<%=question.id%>">
 					    <%= link_to question.title, question_url(question) %>
 							<%= render partial: "questions/delete", locals: { object: question, object_url: question_url(question) } %>
 					  </div>
 					  <div class="index-question-body" id="question-body-<%=question.id%>">
-							<!-- TODO: fix this -->
 							<% question_body = strip_tags(question.body.html_safe) %>
 							<% if question_body.length > 160 %>
 								<!-- TODO: break slightly more elegantly, -->
@@ -62,7 +68,7 @@
 								</span>
 							<% end %>
 						</div>
-					</td> <!-- /q-content-cell -->
+					</td>
 				</tr>
 			</table>
 		</div> <!-- /index-question-block -->

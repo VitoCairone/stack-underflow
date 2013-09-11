@@ -1,5 +1,5 @@
 <% if owned(object) %>
-<small><small>
+<div class="delete-link">
   [<%= link_to "delete", object_url, method: :delete %>]
-</small></small>
+</div>
 <% end %>

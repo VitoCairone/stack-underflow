@@ -1,12 +1,14 @@
 <div class="index-head">
 	<h2>Top Questions</h2>
-	<hr>
 </div>
 
+<!-- this partial does almost all the work on this page -->
 <%= render "questions/list" %>
 
-<!-- consider replacing with https://github.com/derobins/wmd/tree/master -->
+<!-- beyond this point is the New Question section -->
 <a name="ask"></a>
+
+<!-- Title input is not extracted out because it's unique to this page -->
 <div class="wmd-panel" id="title-input">
 	<label for="question_title">
 		Title
@@ -15,24 +17,15 @@
 	<input type="text" name="question[title]" id="question_title">
 </div>
 
-<div class="wmd-panel" id="body-label"></div>
-<div class="wmd-panel">
-	<div id="wmd-button-bar">
-	</div>
-	<textarea class="wmd-input" id="wmd-input">
-	</textarea>
-</div>
-
-<div class="wmd-panel" id="preview-label">
-	Preview:
-</div>
-<div class="wmd-panel wmd-preview" id="wmd-preview">
-</div>
+<!-- This partial has the input and preview elements of the markdown editor -->
+<!-- consider replacing this mardown editor (WMD) with
+		 https://github.com/derobins/wmd/tree/master -->
+<%= render "questions/wmd_core" %>
 
 <div class="wmd-panel" id="tag-selector">
 	<% all_tags = Tag.all %>
 
-	<!-- Dynamically create the first tags dropdown -->
+	<!-- Create the first tags dropdown as visible -->
 	<label for="question_tag_ids">Tags</label>
 	<select class="question-tag-select" id="question-tag-ids-0">
 		<% all_tags.each do |tag| %>
@@ -42,7 +35,8 @@
 		<% end %>
 	</select>
 
-	<!-- Now create 4 more hidden tag dropdowns -->
+	<!-- Now create 4 more hidden tag dropdowns, which are individually exposed
+			 when the one previous has a value selected -->
 	<% 4.times do |i| %>
 		<select class="question-tag-select hidden" id="question-tag-ids-<%= i+1 %>">
 			<% all_tags.each do |tag| %>

@@ -1,0 +1,16 @@
+<% my_vote = user_vote_on(subject) %>
+<div class="vote-block" data-id="<%= my_vote ? my_vote.id : -1 %>">
+	<% top_class = my_vote && my_vote.is_up ? " my-vote-top" : "" %>
+	<div class="vote-block-top vote-sub-block <%= top_class %>">
+	</div>
+	<div class="vote-block-ctr vote-sub-block">
+		<%= subject.rating %>
+	</div>
+	<% bot_class = my_vote && !my_vote.is_up ? " my-vote-bot" : ""%>
+	<div class="vote-block-bot vote-sub-block <%= bot_class %>">
+	</div>
+</div>
+<% if has_accept %>
+	<div class="<%= accept_block_class(subject) %>">
+	</div>
+<% end %>

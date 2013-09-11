@@ -1,0 +1,34 @@
+<table class="answer-table">
+	<tr>
+		<td class="vote-cell" valign="top" data-id="<%=answer.id%>">
+			<%= render "questions/vote_cell", subject: answer, has_accept: true %>
+		</td>
+	
+		<td>
+			<div class="single-answer">
+				<!-- TODO: fix this -->
+			  <%= answer.body.html_safe %>
+				Answered by <%= answer.user.username %>
+				<% del_locals = { object: answer, object_url: question_answer_url(@question, answer) } %>
+				<%= render partial: "questions/delete", locals: del_locals %>
+				[
+				<% com_id = "comment-a-#{answer.id}" %>
+				<% com_action = answer_comments_url(answer) %>
+				<a href="#" class="comment-link" id="<%= com_id %>" data-action="<%= com_action %>">
+					comment
+				</a>
+				]
+			</div>
+		  <div class="answer-comments">
+		    <% answer.comments.each do |comment| %>
+					<div class="single-answer-comment">
+		        <%= comment.body.html_safe %>  
+						by <%= comment.user.username %>
+						<% del_locals = { object: comment, object_url: answer_comment_url(answer, comment) } %>
+						<%= render partial: "questions/delete", locals: del_locals %>
+					</div>
+		    <% end %>
+		  </div>
+		</td>
+	</tr>
+</table>
