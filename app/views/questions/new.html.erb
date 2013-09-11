@@ -1,16 +1,2 @@
 <h1>DEPRECTATED</h1>
-<h2>Use the window on the bottom of the Index page</h2>
-<h3>New Question</h1>
-<form action="<%= questions_url %>" method="Post">
-  <div>
-    <label for="question_title">Title</label>
-    <input type="text" name="question[title]" id="question_title">
-  </div>
-  <div>
-    <textarea name="question[body]" id="question_body"></textarea>
-  </div>
-  <div>
-    <input type="submit" value="Post Your Question" id="submit-button">
-  </div>
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-</form>
+<h2>Questions should be created In-Place on the Index</h2>

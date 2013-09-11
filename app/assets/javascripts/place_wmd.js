@@ -24,7 +24,7 @@ $(document).ready(function() {
 		var user_text = converter.makeHtml($("#wmd-input").val());
 
 		//send only a unique list of tags when tags are redundant
-		//TODO: make redundant tags unselectable
+		//TODO: make redundant tags unselectable on the UI side
 		var tag_ids_arr = [];
 		for (var i = 0; i <= 4; i++) {
 			var tag_id = $("#question-tag-ids-" + i).val();

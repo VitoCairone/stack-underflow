@@ -1,195 +1,154 @@
-<div class="show-question-master">
-	<div class="corridor">
+<div class="corridor">
 
-		<div class="logo-block">
-		</div>
+	<div class="logo-block">
+	</div>
 
-		<table class="corridor-table">
+	<table class="corridor-table">
 		<tr class="question-title">
 			<div class="show-question-title" id="question-title-<%=@question.id%>">
-				<!-- Not a header tag because headers insert an extra blank line -->
-				<big><big><b>
 			  <%= @question.title %>
-				</big></big></b>
 			</div>
 		</tr>
-		<td class="content-column">
-		<!--div class="content-column"-->
+		<tr>
+			<td class="content-column">
+				<div class="question-block">
+					<table class="show-question-table">
+						<tr>
+							<td class="vote-cell" valign="top" data-id="<%=@question.id%>">
+								<% my_vote = user_vote_on(@question) %>
+								<div class="vote-block" data-id="<%= my_vote ? my_vote.id : -1 %>">
+									<div class="vote-block-top vote-sub-block <%= my_vote && my_vote.is_up ? " my-vote-top" : ""%>">
+									</div>
+									<div class="vote-block-ctr vote-sub-block">
+										<%= @question.rating %>
+									</div>
+									<div class="vote-block-bot vote-sub-block <%= my_vote && !my_vote.is_up ? " my-vote-bot" : ""%>">
+									</div>
+								</div>
+							</td>
+							<td>		
+								<div class="show-question-body" id="question-body-<%=@question.id%>">
+									<!-- TODO: fix this -->
+									<%= @question.body.html_safe %>
+									<%= render partial: "questions/delete",	locals: { object: @question, object_url: question_url(@question) } %>
+									[
+									<a href="#" class="comment-link" id="comment-q-<%=@question.id%>" data-action="<%= question_comments_url(@question) %>">
+										comment
+									</a>
+									]
+									<div class="asker-block">
+										<% ask_time = @question.created_at.localtime %>
+										asked <%= ask_time.strftime("%b %e at %l:%M %P") %>
+										by <%= @question.user.username %>
+									</div>
+								</div>
+			
+								<div class="question-comments">
+					  			<% @question.comments.each do |comment| %>
+										<div class="question-comment">
+					    				<%= comment.body.html_safe %> by <%= comment.user.username %>
+											<%= render partial: "questions/delete",	locals: { object: comment, object_url: question_comment_url(@question, comment) } %>
+										</div>
+					  			<% end %>
+								</div>
+			
+							</td>
+						</tr>
+					</table>
+				</div> <!-- /question-block -->
 
-			<div class="question-block">
-			<table class="show-question-table">
-			<tr>
-			<td class="vote-cell" valign="top"
-			data-id="<%=@question.id%>">
-				<% my_vote = user_vote_on(@question) %>
-				<div class="vote-block"
-				data-id="<%= my_vote ? my_vote.id : -1 %>">
-					<div class="vote-block-top vote-sub-block
-					<%= my_vote && my_vote.is_up ? " my-vote-top" : ""%>"
-				  >
-					</div>
-					<div class="vote-block-ctr vote-sub-block">
-					<%= @question.rating %>
-					</div>
-					<div class="vote-block-bot vote-sub-block 
-					<%= my_vote && !my_vote.is_up ? " my-vote-bot" : ""%>"
-					>
-					</div>
+				<div class="tab-bar">
 				</div>
-			</td>
-			<td>		
-				<div class="show-question-body" id="question-body-<%=@question.id%>">
-					<!-- TODO: fix this -->
-					<%= @question.body.html_safe %>
-					<%= render partial: "questions/delete",	locals: { object: @question,
-										 object_url: question_url(@question) } %>
-					<small><small>
-						[<a href="#" class="comment-link"
-						id="comment-q-<%=@question.id%>"
-						data-action="<%= question_comments_url(@question) %>">
-						comment
-						</a>]
-						<!--
-						[<%= link_to "comment", new_question_comment_url(@question) %>]
-						-->
-					</small></small>
-					
-					<div class="asker-block">
-						<% ask_time = @question.created_at.localtime %>
-						asked <%= ask_time.strftime("%b %e at %l:%M %P") %>
-						by <%= @question.user.username %>
-					</div>
-				</div>
-				
-				<div class="question-comments">
-				  <% @question.comments.each do |comment| %>
-					<div class="question-comment">
-				    <%= comment.body.html_safe %> by <%= comment.user.username %>
-						<%= render partial: "questions/delete",	locals: { object: comment,
-											 object_url: question_comment_url(@question, comment) } %>
-					</div>
-				  <% end %>
-				</div>
-				
-			</td>
-			</tr>
-			</table>
 
-			</div>
+				<div class="answer-container">
+					<div class="answer-block" data-id="<%=@question.id%>">
 
-			<div class="tab-bar">
-			</div>
-
-			<div class="answer-container">
-				<div class="answer-block" data-id="<%=@question.id%>">
-
-					<% if @answers %>
-				    <div class="show-answer-count">
-					    <big><b><%= @answers.length %> Answers</b></big>
-					  </div>
-						  <% @answers.each do |answer| %>
-								<div class="show-answer-container grad-blue"> <!-- rename/remove -->
-							    <table class="answer-table">
+						<% if @answers %>
+					    <div class="show-answer-count">
+						  	<%= @answers.length %> Answers
+						  </div>
+							<% @answers.each do |answer| %>
+								<div class="show-answer-container"> <!-- rename/remove? -->
+									<table class="answer-table">
 										<tr>
-											<td class="vote-cell" valign="top"
-											data-id="<%=answer.id%>">
+											<td class="vote-cell" valign="top" data-id="<%=answer.id%>">
 												<% my_vote = user_vote_on(answer) %>
-												<div class="vote-block"
-												data-id="<%= my_vote ? my_vote.id : -1 %>">
-													<div class="vote-block-top vote-sub-block
-													<%= my_vote && my_vote.is_up ? " my-vote-top" : ""%>"
-												  >
+												<div class="vote-block" data-id="<%= my_vote ? my_vote.id : -1 %>">
+													<div class="vote-block-top vote-sub-block <%= my_vote && my_vote.is_up ? " my-vote-top" : ""%>">
 													</div>
 													<div class="vote-block-ctr vote-sub-block">
-													<%= answer.rating %>
+														<%= answer.rating %>
 													</div>
-													<div class="vote-block-bot vote-sub-block 
-													<%= my_vote && !my_vote.is_up ? " my-vote-bot" : ""%>"
-													>
+													<div class="vote-block-bot vote-sub-block <%= my_vote && !my_vote.is_up ? " my-vote-bot" : ""%>">
 													</div>
 												</div>
 												<div class="<%= accept_block_class(answer) %>">
 												</div>
 											</td>
-											
+										
 											<td>
 												<div class="single-answer">
 													<!-- TODO: fix this -->
-											    <%= answer.body.html_safe %>
-													<br><small>Answered by
-														<%= answer.user.username %>
-													</small>
-													<%= render partial: "questions/delete",
-													locals: { object: answer,
-													object_url: question_answer_url(@question, answer) }
-													%>
-													<small><small>
-														[<a href="#" class="comment-link"
-														id="comment-a-<%=answer.id%>"
-														data-action="<%= answer_comments_url(answer) %>">
+												  <%= answer.body.html_safe %>
+													Answered by <%= answer.user.username %>
+													<%= render partial: "questions/delete", locals: { object: answer, object_url: question_answer_url(@question, answer) } %>
+													[
+													<a href="#" class="comment-link" id="comment-a-<%=answer.id%>" data-action="<%= answer_comments_url(answer) %>">
 														comment
-														</a>]
-														<!--
-											    	[<%= link_to "comment", 
-														new_answer_comment_url(answer) %>]
-														-->
-													</small></small>
+													</a>
+													]
 												</div>
-										    <div class="answer-comments">
-										      <% answer.comments.each do |comment| %>
-													<div class="single-answer-comment">
-										        <%= comment.body.html_safe %>
-														<br><small><small>
+											  <div class="answer-comments">
+											    <% answer.comments.each do |comment| %>
+														<div class="single-answer-comment">
+											        <%= comment.body.html_safe %>  
 															by <%= comment.user.username %>
-														</small></small>
-														<%= render partial: "questions/delete",
-														locals: { object: comment,
-														object_url: answer_comment_url(answer, comment) }
-														%>
-													</div>
-										      <% end %>
-										    </div>
+															<%= render partial: "questions/delete", locals: { object: comment, object_url: answer_comment_url(answer, comment) } %>
+														</div>
+											    <% end %>
+											  </div>
 											</td>
 										</tr>
 									</table>
-								</div> <!-- show-answer-container; rename/remove this -->
-						  <% end %>
+								</div> <!-- /show-answer-container -->
+							<% end %>
+						<% end %>
+					</div> <!-- /answer-block -->
+				</div> <!-- /answer-container -->
+
+				<a name="answer">
+				</a>
+				<div class="answer-page-wmd">
+					<br>
+					<div class="wmd-panel submit-button">
+						<button id="new_answer_button" data-action="<%= question_answers_url(@question) %>">
+							Submit Answer
+						</button>
+					</div>
+					<div class="wmd-panel">
+						<div id="wmd-button-bar">
+						</div>
+						<textarea class="wmd-input" id="wmd-input">
+						</textarea>
+					</div>
+					<div class="wmd-panel" id="preview-label">
+						Preview:
+					</div>
+					<div id="wmd-preview" class="wmd-panel wmd-preview">
+					</div>
+				</div>
+
+			</td> <!-- /content-column -->
+			<td class="related-column" valign="top">
+				<% if (tags = @question.tags) %>
+					<% tags.each do |tag| %>
+						<span class="tag-show">
+							<%= tag.name%>
+						</span>
+						<br>
 					<% end %>
-
-				</div> <!-- answer-block -->
-			</div> <!-- answer-container -->
-
-			<a name="answer"></a>
-			<div class="answer-page-wmd">
-				<br>
-				<div class="wmd-panel submit-button">
-					<button id="new_answer_button"
-					data-action="<%= question_answers_url(@question) %>">
-						Submit Answer
-					</button>
-				</div>
-				<div class="wmd-panel">
-				<div id="wmd-button-bar"></div>
-				<textarea class="wmd-input" id="wmd-input"></textarea>
-				</div>
-				<div class="wmd-panel" id="preview-label">
-				Preview:
-				</div>
-				<div id="wmd-preview" class="wmd-panel wmd-preview">
-				</div>
-			</div>
-
-		<!--/div--> <!-- content-column -->
-		</td><td class="related-column" valign="top">
-		<!--div class="related-column"-->
-
-		<% if (tags = @question.tags) %>
-			<% tags.each do |tag| %>
-				<span class="tag-show"><%= tag.name%></span><br>
-			<% end %>
-		<% end %>
-
-		<!--/div-->
-		</td></tr></table>
-	</div>
-</div>
+				<% end %>
+			</td>
+		</tr>
+	</table> <!-- /corridor-table -->
+</div> <!-- /corridor -->

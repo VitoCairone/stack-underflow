@@ -1,6 +1,6 @@
 <div class="index-head">
-<h2>Top Questions</h2>
-<hr>
+	<h2>Top Questions</h2>
+	<hr>
 </div>
 
 <%= render "questions/list" %>
@@ -8,43 +8,54 @@
 <!-- consider replacing with https://github.com/derobins/wmd/tree/master -->
 <a name="ask"></a>
 <div class="wmd-panel" id="title-input">
-	<label for="question_title">Title</label>
-	<br><input type="text" name="question[title]" id="question_title">
+	<label for="question_title">
+		Title
+	</label>
+	<br>
+	<input type="text" name="question[title]" id="question_title">
 </div>
 
-<div class="wmd-panel" id="body-label">
-	Body
-</div>
+<div class="wmd-panel" id="body-label"></div>
 <div class="wmd-panel">
-<div id="wmd-button-bar"></div>
-<textarea class="wmd-input" id="wmd-input"></textarea>
+	<div id="wmd-button-bar">
+	</div>
+	<textarea class="wmd-input" id="wmd-input">
+	</textarea>
 </div>
 
 <div class="wmd-panel" id="preview-label">
 	Preview:
 </div>
-<div id="wmd-preview" class="wmd-panel wmd-preview">
+<div class="wmd-panel wmd-preview" id="wmd-preview">
 </div>
 
 <div class="wmd-panel" id="tag-selector">
-<% all_tags = Tag.all %>
-<label for="question_tag_ids">Tags</label>
-<select class="question-tag-select" id="question-tag-ids-0">
-	<% all_tags.each do |tag| %>
-		<option value="<%=tag.id%>"><%=tag.name%></option>
+	<% all_tags = Tag.all %>
+
+	<!-- Dynamically create the first tags dropdown -->
+	<label for="question_tag_ids">Tags</label>
+	<select class="question-tag-select" id="question-tag-ids-0">
+		<% all_tags.each do |tag| %>
+			<option value="<%= tag.id %>">
+				<%= tag.name %>
+			</option>
+		<% end %>
+	</select>
+
+	<!-- Now create 4 more hidden tag dropdowns -->
+	<% 4.times do |i| %>
+		<select class="question-tag-select hidden" id="question-tag-ids-<%= i+1 %>">
+			<% all_tags.each do |tag| %>
+				<option value="<%= tag.id %>">
+					<%= tag.name %>
+				</option>
+			<% end %>
+		</select>
 	<% end %>
-</select>
-<!-- Now do that 4 more times -->
-<% 4.times do |i| %>
-<select class="question-tag-select hidden" id="question-tag-ids-<%= i+1 %>">
-	<% all_tags.each do |tag| %>
-		<option value="<%=tag.id%>"><%=tag.name%></option>
-	<% end %>
-</select>
-<% end %>
 </div>
 
 <div class="wmd-panel submit-button">
-	<button id="new_question_button"
-	data-action="<%= questions_url %>">Submit Question</button>
+	<button id="new_question_button" data-action="<%= questions_url %>">
+		Submit Question
+	</button>
 </div>

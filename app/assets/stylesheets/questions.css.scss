@@ -7,6 +7,15 @@
 
 // TODO: Organize this mess
 
+/* replaces cumbersome show-question-master div */
+body {
+	/*       Top Rit Btm Lft  */
+	padding: 0px 0px 0px 10px;
+	a:link { text-decoration: none; }    /* unvisited link */
+	a:visited { text-decoration: none; } /* visited link */
+	a:hover { text-decoration: underline; }   /* mouse over link */
+	a:active { text-decoration: underline; }  /* selected link */
+}
 
 .corridor {
 	margin-left: 15%;
@@ -67,15 +76,6 @@
 	padding-bottom: 10px;
 	padding-top: 10px;
 	border-bottom: 1px solid #aaa;
-}
-
-.show-question-master {
-	/*       Top Rit Btm Lft  */
-	padding: 0px 0px 0px 10px;
-	a:link { text-decoration: none; }    /* unvisited link */
-	a:visited { text-decoration: none; } /* visited link */
-	a:hover { text-decoration: underline; }   /* mouse over link */
-	a:active { text-decoration: underline; }  /* selected link */
 }
 
 .show-question-title {
