@@ -2,8 +2,8 @@
 
 <% @questions = @tag.questions %>
 <div class="index-head">
-<h1>Questions tagged <%= @tag.name.capitalize %>: <%= @questions.length %></h1>
-<hr>
+	<h1>Questions tagged <%= @tag.name.capitalize %>: <%= @questions.length %></h1>
+	<hr>
 </div>
 
 <%= render "questions/list" %>
