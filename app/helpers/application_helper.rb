@@ -20,8 +20,7 @@ module ApplicationHelper
     if @object
       #TODO: fail non-owned destroy more loudly
       @object.destroy if owned(@object)
-      #render json: @object
-      if klass == Question #in this case :back may no longer exist
+      if klass == Question # may render the 'back' view nonexistant
         redirect_to home_url
       else
         redirect_to :back
@@ -83,7 +82,7 @@ module ApplicationHelper
   def user_vote_on(obj)
     return nil unless logged_in?
     votes = obj.votes
-    idx = votes.index {|vote| vote.user_id == current_user.id}
+    idx = votes.index { |vote| vote.user_id == current_user.id }
     idx ? votes[idx] : nil
   end 
 

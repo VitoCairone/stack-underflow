@@ -1,24 +1,28 @@
 <h1>Listing tags</h1>
-<h2>This is a Disconnected Page - it is unreachable except by typing the URL</h2>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @tags.each do |tag| %>
-  <tr>
-    <td><%= tag.name %></td>
-    <td><%= link_to 'Show', tag %></td>
-    <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
-    <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<table>	
+<% row_count = ((num_tags = @tags.length) / 4.0).ceil %>
+<% row_count.times do |rownum| %>
+	<tr>
+	<% 4.times do |colnum| %>
+		<% tagnum = rownum * 4 + colnum %>
+		<% break if tagnum >= num_tags %>
+		<td height=60px width=250px>
+			<% tag = @tags[tagnum] %>
+			<span class="tag-show">
+				<%= tag.name %>
+			</span>
+			&nbsp;x <%= tag.taggings.length %>
+			<br>
+			(
+			<%= link_to 'Questions', tag %>,
+			<%= link_to 'Rename', edit_tag_path(tag) %>,
+			<%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %>
+			)
+		</td>
+	<% end %>
+	</tr>
 <% end %>
 </table>
-
-<br />
 
 <%= link_to 'New Tag', new_tag_path %>

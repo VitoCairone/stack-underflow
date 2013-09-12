@@ -23,12 +23,10 @@
   <% end %>
 </div>
 
-<div class="sub-header">
-  <%= link_to "Ask Question", "/questions#ask" %><br>
-  <%= link_to "Home", home_url %>
+<div class="corridor">
+	<%= render "questions/logo_block" %>
+	<%= yield %>
 </div>
-
-<%= yield %>
 
 </body>
 </html>

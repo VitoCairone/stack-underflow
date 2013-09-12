@@ -8,9 +8,11 @@
 	border-right: 2px solid #b3cee1;
 	padding: 2px;
 	margin: 2px;
-	a { color: #000; }
-	a:link { text-decoration: none; }    /* unvisited link */
-	a:visited { text-decoration: none; } /* visited link */
-	a:hover { text-decoration: underline; }   /* mouse over link */
-	a:active { text-decoration: underline; }  /* selected link */
+	:hover {
+		background-color: #b3cee1;
+	}
+	a:link { color: #000; text-decoration: none; }
+	a:visited { color: #000; text-decoration: none; }
+	a:hover { color: #000; text-decoration: none; }
+	a:active { color: #000; text-decoration: none; } 
 }

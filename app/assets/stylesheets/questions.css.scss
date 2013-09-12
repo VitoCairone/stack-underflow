@@ -10,16 +10,21 @@
 /* replaces cumbersome show-question-master div */
 body {
 	/*       Top Rit Btm Lft  */
-	padding: 0px 0px 0px 10px;
+	padding: 0px 0px 0px 0px;
 	a:link { text-decoration: none; }    /* unvisited link */
 	a:visited { text-decoration: none; } /* visited link */
 	a:hover { text-decoration: underline; }   /* mouse over link */
 	a:active { text-decoration: underline; }  /* selected link */
 }
 
+.logo-block {
+	padding-top: 20px;
+}
+
 .corridor {
-	margin-left: 15%;
-	margin-right: 15%;
+	padding-left: 10px;
+	width: 1080px;
+	margin: 0 auto; /* centers the element on the page */
 }
 
 .corridor-table {
@@ -27,25 +32,26 @@ body {
 }
 
 .logo-block {
-	background: #000000;
+	height: 60px;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	font-color: #00f;
 }
 
 .content-column {
 	width: 80%;
-	background: #eeeeff;
+	/* background: #eeeeff; */
 }
 
 .related-column {
-	background: #edeeee;
-}
-
-.question-block {
-
+	padding-left: 20px;
+	/* background: #edeeee; */
 }
 
 .tab-bar {
 	height: 30px;
-	background: #ecdaec;
+	/* background: #ecdaec; */
 }
 
 /* required for asker-block to properly align to the right */
@@ -61,25 +67,32 @@ body {
 // OLD CSS below this point
 
 .index-question-list {
-  margin-left: 20%;
-	margin-right: 20%;
+	
+}
+
+.index-header {
+	font-size: 26px;
+	font-weight: bolder;
 }
 
 .index-question-title {
-	a:link {color:#0050D0; text-decoration: none; }    /* unvisited link */
-	a:visited {color:#0050D0; text-decoration: none; } /* visited link */
-	a:hover {color:#0050D0; text-decoration: underline;}   /* mouse over link */
-	a:active {color:#0050D0; text-decoration: underline;}  /* selected link */
+	font-size: 20px;
+	font-weight: bold;
+	a:link { color:#0050D0; text-decoration: none; }    /* unvisited link */
+	a:visited { color:#0050D0; text-decoration: none; } /* visited link */
+	a:hover { color:#0050D0; text-decoration: underline; }   /* mouse over link */
+	a:active { color:#0050D0; text-decoration: underline; }  /* selected link */
 }
 
 .index-question-block {
-	padding-bottom: 10px;
-	padding-top: 10px;
+	/* padding-bottom: 10px; */
+	/* padding-top: 10px; */
 	border-bottom: 1px solid #aaa;
 }
 
 .show-question-title {
-	margin-right: 10px;
+	font-size: 26px;
+	font-weight: bold;
 	border-bottom: 1px solid #aaa;
 }
 
@@ -89,7 +102,6 @@ body {
 }
 
 .show-answer-count {
-	margin: 0 10px 0 0;
   border-bottom: 1px solid #aaa;
 }
 

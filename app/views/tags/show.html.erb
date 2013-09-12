@@ -1,11 +1,9 @@
+<!-- TODO: blitz this page; replace with a partial which reproduces all of the
+		 content from the index page -->
+
 <p id="notice"><%= notice %></p>
 
 <% @questions = @tag.questions %>
-<div class="index-head">
-	<h1>Questions tagged <%= @tag.name.capitalize %>: <%= @questions.length %></h1>
-	<hr>
-</div>
+<% header_text = "Questions tagged #{@tag.name.capitalize}: #{@questions.length}"%>
 
-<%= render "questions/list" %>
-
-<%= link_to 'Tags Index', tags_path %>
+<%= render "questions/index_corridor", header_text: header_text %>

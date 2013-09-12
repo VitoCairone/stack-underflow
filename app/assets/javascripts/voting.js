@@ -82,8 +82,8 @@ window.StackUnderflow = $.extend(window.StackUnderflow || {}, {
 }); //end StackUnderflow assign/extend
 
 $(document).ready(function () {
-	//var SO = window.StackUnderflow;
 	
+	// Event listeners for the voting handler defined above
 	$(".question-block .vote-block-top").on("click", function (event) {
 		window.StackUnderflow.handleVote(event, true, "../questions");
 	});
@@ -98,6 +98,8 @@ $(document).ready(function () {
 		window.StackUnderflow.handleVote(event, false, "../answers");
 	})
 	
+	//This block is for when a user clicks to select a best answer,
+	//i.e., on the empty checkmark outline
 	$(".accept-block").on("click", function (event) {
 		var $target = $(event.target);
 		var ablock = $target.closest(".vote-cell");
@@ -108,7 +110,12 @@ $(document).ready(function () {
 		    url: '../questions/' + targ_question_id,
 				data: { question: { best_answer_id: targ_answer_id } },
 		    type: 'PUT',
-				success: function () { location.reload() }
+				success: function () { 
+					location.reload();
+				},
+				error: function () { 
+					console.log("AJAX error when attempting to accept an answer");
+				}
 		});
 	});
 	

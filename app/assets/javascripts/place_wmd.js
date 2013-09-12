@@ -60,22 +60,8 @@ $(document).ready(function() {
 			}
 		});
 	});
-	
-	//This causes no tag to be selected by default in the tag lists
-	$(".question-tag-select").prop("selectedIndex", -1);
-
-	//This unhides subsequent tag selectors when a tag is selected.
-	//TODO: Allow 'closing' of tag selectors
-	//TODO: Don't display options in later tag selectors
-	//      which were already chosen
-	$(".question-tag-select").on("change", function() {
-		var my_number = this.id.slice(-1);
-		my_number = parseInt(my_number) + 1;
-		$my_el = $("#question-tag-ids-" + my_number);
-		$my_el.removeClass("hidden");
-	});
-	
-	//This block sets up the submit for the Answer WMD on a Question Show page
+		
+	//This block sets up the submit for a New Answer from the Question Show page
 	$('#new_answer_button').on("click", function(event) {
 		event.preventDefault();
 		var converter = Markdown.getSanitizingConverter();

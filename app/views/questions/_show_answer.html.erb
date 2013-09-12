@@ -11,13 +11,11 @@
 				Answered by <%= answer.user.username %>
 				<% del_locals = { object: answer, object_url: question_answer_url(@question, answer) } %>
 				<%= render partial: "questions/delete", locals: del_locals %>
-				[
+				
 				<% com_id = "comment-a-#{answer.id}" %>
 				<% com_action = answer_comments_url(answer) %>
-				<a href="#" class="comment-link" id="<%= com_id %>" data-action="<%= com_action %>">
-					comment
-				</a>
-				]
+				<!-- splitting up this line introduces padding whitespace -->
+				[<a href="#" class="comment-link" id="<%= com_id %>" data-action="<%= com_action %>">comment</a>]
 			</div>
 		  <div class="answer-comments">
 		    <% answer.comments.each do |comment| %>

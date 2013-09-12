@@ -8,7 +8,7 @@ StackUnderflow::Application.routes.draw do
     resources :comments, only: [:create, :destroy, :new]
     resources :votes, only: [:create, :destroy]
   end
-  resources :users, only: [:create, :destroy, :new]
+  resources :users, only: [:create, :destroy, :new, :index]
   resource :session, only: [:create, :destroy, :new]
   #/answers/ exists exclusively to nest comments underneath, so that
   # comments can be posted both on questions and on answers. The actual answers

@@ -1,64 +1,58 @@
-<div class="corridor">
-
-	<div class="logo-block">
-	</div>
-
-	<table class="corridor-table">
-		<tr class="question-title">
-			<div class="show-question-title" id="question-title-<%=@question.id%>">
-			  <%= @question.title %>
+<table class="corridor-table">
+	<tr class="question-title">
+		<div class="show-question-title" id="question-title-<%=@question.id%>">
+		  <%= @question.title %>
+		</div>
+	</tr>
+	<tr>
+		
+		<td class="content-column">
+			<div class="question-block">
+				<%= render "questions/show_question" %>
 			</div>
-		</tr>
-		<tr>
-			
-			<td class="content-column">
-				<div class="question-block">
-					<%= render "questions/show_question" %>
-				</div> <!-- /question-block -->
 
-				<div class="tab-bar">
-				</div>
+			<div class="tab-bar">
+			</div>
 
-				<div class="answer-container">
-					<div class="answer-block" data-id="<%=@question.id%>">
+			<div class="answer-container">
+				<div class="answer-block" data-id="<%=@question.id%>">
 
-						<% if @answers %>
-					    <div class="show-answer-count">
-						  	<%= @answers.length %> Answers
-						  </div>
-							<% @answers.each do |answer| %>
-								<div class="show-answer-container"> <!-- rename/remove? -->
-									<%= render "questions/show_answer", answer: answer %>
-								</div>
-							<% end %>
+					<% if @answers %>
+				    <div class="show-answer-count">
+					  	<%= @answers.length %> Answers
+					  </div>
+						<% @answers.each do |answer| %>
+							<div class="show-answer-container"> <!-- rename/remove? -->
+								<%= render "questions/show_answer", answer: answer %>
+							</div>
 						<% end %>
-					</div>
-				</div>
-
-				<a name="answer">
-				</a>
-				<div class="answer-page-wmd">
-					<br>
-					<div class="wmd-panel submit-button">
-						<button id="new_answer_button" data-action="<%= question_answers_url(@question) %>">
-							Submit Answer
-						</button>
-					</div>
-					<%= render "questions/wmd_core" %>
-				</div>
-			</td> <!-- /content-column -->
-			
-			<td class="related-column" valign="top">
-				<% if (tags = @question.tags) %>
-					<% tags.each do |tag| %>
-						<span class="tag-show">
-							<%= tag.name%>
-						</span>
-						<br>
 					<% end %>
+				</div>
+			</div>
+
+			<a name="answer">
+			</a>
+			<div class="answer-page-wmd">
+				<br>
+				<div class="wmd-panel submit-button">
+					<button id="new_answer_button" data-action="<%= question_answers_url(@question) %>">
+						Submit Answer
+					</button>
+				</div>
+				<%= render "questions/wmd_core" %>
+			</div>
+		</td> <!-- /content-column -->
+		
+		<td class="related-column" valign="top">
+			<% if (tags = @question.tags) %>
+				<% tags.each do |tag| %>
+					<span class="tag-show">
+						<%= tag.name%>
+					</span>
+					<br>
 				<% end %>
-			</td>
-			
-		</tr>
-	</table> <!-- /corridor-table -->
-</div> <!-- /corridor -->
+			<% end %>
+		</td>
+		
+	</tr>
+</table> <!-- /corridor-table -->

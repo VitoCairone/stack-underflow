@@ -18,4 +18,9 @@ class UsersController < ApplicationController
     # because their session token no longer exists in the users table
     destroy_this User
   end
+  
+  def index
+    @users = User.all
+    render :index
+  end
 end

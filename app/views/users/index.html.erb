@@ -1,0 +1,26 @@
+<h1>Listing users</h1>
+
+<table>
+  <tr>
+    <th align="left">Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+	<% @users.each do |user| %>
+	  <tr>
+	    <td>
+				<%= user.username %>
+			</td>
+			<% if logged_in? && current_user.id == user.id %>
+	    	<td>
+					<%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
+			<% end %>
+	  </tr>
+	<% end %>
+
+</table>
+
+<br />
