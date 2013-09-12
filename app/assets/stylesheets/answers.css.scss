@@ -4,13 +4,10 @@
 
 .answer-table {
 	width: 100%;
-	padding-right: 10px;
 }
 
-/* TODO: refactor this! */
 .answer-page-wmd {
 	width: 60%;
-	padding-right: 10px;
 }
 
 .answer-comments {
@@ -24,4 +21,10 @@
 .single-answer {
 	width: 100%;
 	border-bottom: 1px solid #aaa;
+}
+
+.answerer-block {
+  display: inline-block;
+  float: right;
+  text-align: right;
 }

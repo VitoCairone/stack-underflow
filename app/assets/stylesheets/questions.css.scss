@@ -5,100 +5,120 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-// TODO: Organize this mess
-
-/* replaces cumbersome show-question-master div */
 body {
-	/*       Top Rit Btm Lft  */
-	padding: 0px 0px 0px 0px;
-	a:link { text-decoration: none; }    /* unvisited link */
-	a:visited { text-decoration: none; } /* visited link */
-	a:hover { text-decoration: underline; }   /* mouse over link */
-	a:active { text-decoration: underline; }  /* selected link */
+  /*       Top Rit Btm Lft  */
+  padding: 0px 0px 0px 0px;
+  a:link { text-decoration: none; }    /* unvisited link */
+  a:visited { text-decoration: none; } /* visited link */
+  a:hover { text-decoration: underline; }   /* mouse over link */
+  a:active { text-decoration: underline; }  /* selected link */
 }
 
 .logo-block {
-	padding-top: 20px;
+  padding-top: 20px;
 }
 
 .corridor {
-	padding-left: 10px;
-	width: 1080px;
-	margin: 0 auto; /* centers the element on the page */
+  padding-left: 10px;
+  width: 1080px;
+  margin: 0 auto; /* centers the element on the page */
 }
 
 .corridor-table {
-	width: 100%;
+  width: 100%;
 }
 
 .logo-block {
-	height: 60px;
-	font-size: 20px;
-	font-weight: bold;
-	text-align: center;
-	font-color: #00f;
+  height: 60px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  font-color: #00f;
 }
 
 .content-column {
-	width: 80%;
-	/* background: #eeeeff; */
+  width: 80%;
+  /* background: #eeeeff; */
 }
 
 .related-column {
-	padding-left: 20px;
-	/* background: #edeeee; */
+  padding-left: 20px;
+  /* background: #edeeee; */
 }
 
 .tab-bar {
-	height: 30px;
-	/* background: #ecdaec; */
+  height: 30px;
+  /* background: #ecdaec; */
+}
+
+.list-question-row td {
+  padding-bottom: 30px
 }
 
 /* required for asker-block to properly align to the right */
 .q-content-cell {
-	width: 100%;
+  width: 100%;
+}
+
+.index-question-body {
+  margin-bottom: 20px;
+}
+
+.index-question-tags {
+  display: inline-block;
+  float: left;
 }
 
 .asker-block {
-	width: 100%;
-	text-align: right;
+  display: inline-block;
+  float: right;
+  text-align: right;
+}
+
+.delete-link {
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.comment-link {
+  font-size: 12px;
+  font-weight: normal;
 }
 
 // OLD CSS below this point
 
 .index-question-list {
-	
+  
 }
 
 .index-header {
-	font-size: 26px;
-	font-weight: bolder;
+  font-size: 26px;
+  font-weight: bolder;
 }
 
 .index-question-title {
-	font-size: 20px;
-	font-weight: bold;
-	a:link { color:#0050D0; text-decoration: none; }    /* unvisited link */
-	a:visited { color:#0050D0; text-decoration: none; } /* visited link */
-	a:hover { color:#0050D0; text-decoration: underline; }   /* mouse over link */
-	a:active { color:#0050D0; text-decoration: underline; }  /* selected link */
+  font-size: 20px;
+  font-weight: bold;
+  a:link { color:#0050D0; text-decoration: none; }    /* unvisited link */
+  a:visited { color:#0050D0; text-decoration: none; } /* visited link */
+  a:hover { color:#0050D0; text-decoration: underline; }   /* mouse over link */
+  a:active { color:#0050D0; text-decoration: underline; }  /* selected link */
 }
 
 .index-question-block {
-	/* padding-bottom: 10px; */
-	/* padding-top: 10px; */
-	border-bottom: 1px solid #aaa;
+  /* padding-bottom: 10px; */
+  /* padding-top: 10px; */
+  border-bottom: 1px solid #aaa;
 }
 
 .show-question-title {
-	font-size: 26px;
-	font-weight: bold;
-	border-bottom: 1px solid #aaa;
+  font-size: 26px;
+  font-weight: bold;
+  border-bottom: 1px solid #aaa;
 }
 
 .show-question-author {
-	text-align: right;
-	padding-right: 30px;
+  text-align: right;
 }
 
 .show-answer-count {
@@ -106,53 +126,53 @@ body {
 }
 
 .show-question-body {
-	border-bottom: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
 }
 
 .show-question-table {
-	width: 100%;
+  width: 100%;
 }
 
 .question-comment {
-	border-bottom: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
 }
 
 .submit-button {
-	text-align: right;
+  text-align: right;
 }
 
 .q-stats-block {
-	color: #666;
-	background-color: #ddd;
+  color: #666;
+  background-color: #ddd;
 }
 
 .answer-count-block {
-	color: yellow;
-	background-color: green;
-	/* the bottom margin doesn't actually apply */
-	/* relative position within outer div is used as a fixed */
-	margin: 5px 5px 5px 5px;
-	padding: 3px 3px 3px 3px;
-	position: relative;
-	bottom: 5px;
+  color: yellow;
+  background-color: green;
+  /* the bottom margin doesn't actually apply */
+  /* relative position within outer div is used as a fixed */
+  margin: 5px 5px 5px 5px;
+  padding: 3px 3px 3px 3px;
+  position: relative;
+  bottom: 5px;
 }
 
 .acb-none-picked {
-	color: white;
+  color: white;
 }
 
 .acb-zero {
-	color: #900;
-	background-color: #ddd;
+  color: #900;
+  background-color: #ddd;
 }
 
 .rating-num {
-	font-weight: bolder;
+  font-weight: bolder;
 }
 .answers-num {
-	font-weight: bolder;
+  font-weight: bolder;
 }
 
 #question_title {
-	width: 100%;
+  width: 100%;
 }

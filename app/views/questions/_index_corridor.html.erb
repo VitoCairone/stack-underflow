@@ -64,12 +64,12 @@
 		<td class="related-column" valign="top">
 			<div style="padding: 2px; padding-top: 6px;">
 				<% Tag.all.each do |tag| %>
-						<span class="tag-show">
-							<%= link_to tag.name, tag_url(tag) %>
-						</span>
-						&nbsp;x <%= tag.taggings.count %>
-						<br>
-						<br>
+					<span class="tag-show">
+						<%= link_to tag.name, tag_url(tag) %>
+					</span>
+					&nbsp;x <%= tag.taggings.count %>
+					<br>
+					<br>
 				<% end %>
 			</div>
 		</td>

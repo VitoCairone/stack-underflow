@@ -1,76 +1,76 @@
 <div class="index-question-list">
-	<% @questions.each do |question| %>
-		<div class="index-question-block">
+  <% @questions.each do |question| %>
+    <div class="index-question-block">
 
-	    <table class="question-table">
-				<tr>
-					<td class="q-stats-cell" valign="top" align="center" data-id="<%=question.id%>">
-						
-						<!-- This cell shows the rating and number of answers
-							   with conditional classes depending on whether there are
-								 any answers and whether there is a best answer --> 
-						<div class="q-stats-block">
-							<div class="rating-block">
-								<div class="rating-num">
-									<%= question.rating %>
-								</div>
-								<div class="votes-literal">
-									votes
-								</div>
-							</div>
-							<% ans_count = question.answers.length %>
-							<% answer_classes = "answer-count-block" %>
-							<% if question.best_answer_id == -1 %>
-								<% answer_classes += " acb-none-picked" %>
-							<% end %>
-							<% answer_classes += " acb-zero" if ans_count == 0 %>
-							<div class="<%= answer_classes %>">
-								<div class="answers-num">
-									<%= ans_count %>
-								</div>
-								<div class="answers-literal">
-									answers
-								</div>
-							</div>
-						</div>
-						
-					</td>
-					<td class="q-content-cell">
-						
-						<!-- This cell holds the question title and body -->
-					  <div class="index-question-title" id="question-title-<%=question.id%>">
-					    <%= link_to question.title, question_url(question) %>
-							<%= render partial: "questions/delete", locals: { object: question, object_url: question_url(question) } %>
-					  </div>
-					  <div class="index-question-body" id="question-body-<%=question.id%>">
-							<% question_body = strip_tags(question.body.html_safe) %>
-							<% if question_body.length > 160 %>
-								<!-- TODO: break slightly more elegantly, -->
-								<!-- i.e., prefer the end of a word -->
-								<%= question_body[0..160] %> ...
-							<% else %>
-								<%= question_body %>
-							<% end %>
-					  </div>
-						
-						<div class="asker-block">
-							<% ask_time = question.created_at.localtime %>
-							asked <%= ask_time.strftime("%b %e at %l:%M %P") %>
-							by <%= question.user.username %>
-						</div>
-						
-						<div class="index-question-tags" id="question-tags-<%= question.id %>">
-						  <% question.tags.each do |tag| %>
-								<span class="tag-show" data-id="<%= tag.id %>">
-									<a href="<%= tag_url(tag) %>">
-										<%= tag.name %>
-									</a>
-								</span>
-							<% end %>
-						</div>
-					</td>
-				</tr>
-			</table>
-		</div> <!-- /index-question-block -->
-	<% end %>
+      <table class="question-table">
+        <tr class="list-question-row">
+          <td class="q-stats-cell" valign="top" align="center" data-id="<%=question.id%>">
+            
+            <!-- This cell shows the rating and number of answers
+                 with conditional classes depending on whether there are
+                 any answers and whether there is a best answer --> 
+            <div class="q-stats-block">
+              <div class="rating-block">
+                <div class="rating-num">
+                  <%= question.rating %>
+                </div>
+                <div class="votes-literal">
+                  votes
+                </div>
+              </div>
+              <% ans_count = question.answers.length %>
+              <% answer_classes = "answer-count-block" %>
+              <% if question.best_answer_id == -1 %>
+                <% answer_classes += " acb-none-picked" %>
+              <% end %>
+              <% answer_classes += " acb-zero" if ans_count == 0 %>
+              <div class="<%= answer_classes %>">
+                <div class="answers-num">
+                  <%= ans_count %>
+                </div>
+                <div class="answers-literal">
+                  answers
+                </div>
+              </div>
+            </div>
+            
+          </td>
+          <td class="q-content-cell">
+            
+            <!-- This cell holds the question title and body -->
+            <div class="index-question-title" id="question-title-<%=question.id%>">
+              <%= link_to question.title, question_url(question) %>
+              <%= render partial: "questions/delete", locals: { object: question, object_url: question_url(question) } %>
+            </div>
+            <div class="index-question-body" id="question-body-<%=question.id%>">
+              <% question_body = strip_tags(question.body.html_safe) %>
+              <% if question_body.length > 160 %>
+                <!-- TODO: break slightly more elegantly, -->
+                <!-- i.e., prefer the end of a word -->
+                <%= question_body[0..160] %> ...
+              <% else %>
+                <%= question_body %>
+              <% end %>
+            </div>
+            
+            <div class="index-question-tags" id="question-tags-<%= question.id %>">
+              <% question.tags.each do |tag| %>
+                <span class="tag-show" data-id="<%= tag.id %>">
+                  <a href="<%= tag_url(tag) %>">
+                    <%= tag.name %>
+                  </a>
+                </span>
+              <% end %>
+            </div>
+
+            <div class="asker-block">
+              <% ask_time = question.created_at.localtime %>
+              asked <%= ask_time.strftime("%b %e at %l:%M %P") %>
+              by <%= question.user.username %>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div> <!-- /index-question-block -->
+  <% end %>
 </div> <!-- /index-question-list -->
