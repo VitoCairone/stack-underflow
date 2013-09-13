@@ -1,26 +1,35 @@
 <h1>Listing users</h1>
 
-<table>
-  <tr>
-    <th align="left">Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-	<% @users.each do |user| %>
-	  <tr>
-	    <td>
-				<%= user.username %>
-			</td>
-			<% if logged_in? && current_user.id == user.id %>
-	    	<td>
-					<%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
-			<% end %>
-	  </tr>
-	<% end %>
-
+<table>	
+  <% row_count = ((num_users = @users.length) / 4.0).ceil %>
+  <% row_count.times do |rownum| %>
+  	<tr>
+  	<% 4.times do |colnum| %>
+  		<% usernum = rownum * 4 + colnum %>
+  		<% break if usernum >= num_users %>
+  		<td height=60px width=250px>
+  			<% user = @users[usernum] %>
+  			<span class="user-show">
+  				<%= link_to user.username, user %>
+  			</span>
+  			<br>
+        <small><small>
+        <%= user.questions.length %> questions
+        <% if logged_in? && current_user.id == user.id %>
+          <br>
+    			(
+    			<%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+    			)
+        <% end %>
+        </small></small>
+  		</td>
+  	<% end %>
+  	</tr>
+  <% end %>
 </table>
 
-<br />
+<br>
+<br>
+<br>
+
+<%= link_to 'Sign Up', new_user_path %>

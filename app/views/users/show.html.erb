@@ -1,0 +1,6 @@
+<p id="notice"><%= notice %></p>
+
+<% @questions = @user.questions %>
+<% header_text = "Questions by #{@user.username}: #{@questions.length}"%>
+
+<%= render "questions/index_corridor", header_text: header_text %>

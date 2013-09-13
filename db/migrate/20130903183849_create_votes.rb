@@ -8,5 +8,9 @@ class CreateVotes < ActiveRecord::Migration
 
       t.timestamps
     end
+    
+    add_index :votes, :user_id
+    add_index :votes, :question_id
+    add_index :votes, :answer_id
   end
 end

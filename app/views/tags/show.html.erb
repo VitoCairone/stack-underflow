@@ -1,9 +1,6 @@
-<!-- TODO: blitz this page; replace with a partial which reproduces all of the
-		 content from the index page -->
-
 <p id="notice"><%= notice %></p>
 
 <% @questions = @tag.questions %>
-<% header_text = "Questions tagged #{@tag.name.capitalize}: #{@questions.length}"%>
+<% header_text = "Questions tagged #{@tag.name}: #{@questions.length}"%>
 
 <%= render "questions/index_corridor", header_text: header_text %>

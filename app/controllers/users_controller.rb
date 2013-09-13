@@ -23,4 +23,10 @@ class UsersController < ApplicationController
     @users = User.all
     render :index
   end
+  
+  def show
+    @no_editor = true
+    @user = User.find(params[:id])
+    render :show
+  end
 end

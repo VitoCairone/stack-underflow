@@ -21,7 +21,7 @@ body {
 	margin: 0;
 	margin-bottom: 50px;
 	padding: 0;
-	font-family: Arial,Liberation Sans,DejaVu Sans,sans-serif;
+	font-family: Arial, Liberation Sans, DejaVu Sans, sans-serif;
 }
 
 /* without this, <pre> tags will not wrap their contents */
@@ -36,7 +36,9 @@ pre {
 .header-bar {
 	text-align: right;
 	background-color: #ccc;
+  height: 30px;
 	margin-right: 0px; /* margin seperates the el edge from the page edge */
+  padding-top: 10px;
 	padding-right: 10px; /* padding seperates the content from the el edge */
 }
 

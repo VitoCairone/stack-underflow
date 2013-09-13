@@ -9,9 +9,9 @@
 u1 = User.create({username: "Alpha", password: "foo"}).id;
 u2 = User.create({username: "Beta", password: "foo"}).id;
 u3 = User.create({username: "Gamma", password: "foo"}).id;
-Question.create({title: "Question One", body: "Body One", user_id: u1});
-Question.create({title: "Question Two", body: "Body Two", user_id: u1});
-Question.create({title: "Question Three", body: "Body Three", user_id: u1});
+Question.create({title: "Question One", body: "Body One", user_id: u1, best_answer_id: -1});
+Question.create({title: "Question Two", body: "Body Two", user_id: u1, best_answer_id: -1});
+Question.create({title: "Question Three", body: "Body Three", user_id: u1, best_answer_id: -1});
 Answer.create({user_id: u1, question_id:1, body: "Answer 1-1"});
 Answer.create({user_id: u2, question_id:1, body: "Answer 1-2"});
 Answer.create({user_id: u3, question_id:1, body: "Answer 1-3"});

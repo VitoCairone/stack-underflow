@@ -11,54 +11,59 @@
 			<!-- this partial does almost all the work on this page -->
 			<%= render "questions/list" %>
 
-			<!-- beyond this point is the New Question section -->
-			<a name="ask"></a>
 
-			<!-- Title input is not extracted out because it's unique to this page -->
-			<div class="wmd-panel" id="title-input">
-				<label for="question_title">
-					Title
-				</label>
-				<br>
-				<input type="text" name="question[title]" id="question_title">
-			</div>
+      <% unless @no_editor %>
 
-			<!-- This partial has the input and preview elements of the markdown editor -->
-			<!-- consider replacing this mardown editor (WMD) with
-					 https://github.com/derobins/wmd/tree/master -->
-			<%= render "questions/wmd_core" %>
+  			<!-- beyond this point is the New Question section -->
+  			<a name="ask"></a>
 
-			<div class="wmd-panel" id="tag-selector">
-				<% all_tags = Tag.all %>
+  			<!-- Title input is not extracted out because it's unique to this page -->
+  			<div class="wmd-panel" id="title-input">
+  				<label for="question_title">
+  					Title
+  				</label>
+  				<br>
+  				<input type="text" name="question[title]" id="question_title">
+  			</div>
 
-				<!-- Create the first tags dropdown as visible -->
-				<label for="question_tag_ids">Tags</label>
-				<select class="question-tag-select" id="question-tag-ids-0">
-					<% all_tags.each do |tag| %>
-						<option value="<%= tag.id %>">
-							<%= tag.name %>
-						</option>
-					<% end %>
-				</select>
+  			<!-- This partial has the input and preview elements of the markdown editor -->
+  			<!-- consider replacing this mardown editor (WMD) with
+  					 https://github.com/derobins/wmd/tree/master -->
+  			<%= render "questions/wmd_core" %>
 
-				<!-- Now create 4 more hidden tag dropdowns, which are individually exposed
-						 when the one previous has a value selected -->
-				<% 4.times do |i| %>
-					<select class="question-tag-select hidden" id="question-tag-ids-<%= i+1 %>">
-						<% all_tags.each do |tag| %>
-							<option value="<%= tag.id %>">
-								<%= tag.name %>
-							</option>
-						<% end %>
-					</select>
-				<% end %>
-			</div>
+  			<div class="wmd-panel" id="tag-selector">
+  				<% all_tags = Tag.all %>
 
-			<div class="wmd-panel submit-button">
-				<button id="new_question_button" data-action="<%= questions_url %>">
-					Submit Question
-				</button>
-			</div>
+  				<!-- Create the first tags dropdown as visible -->
+  				<label for="question_tag_ids">Tags</label>
+  				<select class="question-tag-select" id="question-tag-ids-0">
+  					<% all_tags.each do |tag| %>
+  						<option value="<%= tag.id %>">
+  							<%= tag.name %>
+  						</option>
+  					<% end %>
+  				</select>
+
+  				<!-- Now create 4 more hidden tag dropdowns, which are individually exposed
+  						 when the one previous has a value selected -->
+  				<% 4.times do |i| %>
+  					<select class="question-tag-select hidden" id="question-tag-ids-<%= i+1 %>">
+  						<% all_tags.each do |tag| %>
+  							<option value="<%= tag.id %>">
+  								<%= tag.name %>
+  							</option>
+  						<% end %>
+  					</select>
+  				<% end %>
+  			</div>
+
+  			<div class="wmd-panel submit-button">
+  				<button id="new_question_button" data-action="<%= questions_url %>">
+  					Submit Question
+  				</button>
+  			</div>
+      
+      <% end %>
 		</td> <!-- /content-column -->
 		
 		<td class="related-column" valign="top">

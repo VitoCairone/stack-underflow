@@ -1,5 +1,11 @@
 window.StackUnderflow = $.extend(window.StackUnderflow || {}, {
 	handleVote: function (event, for_top, type_str) {		
+    
+    if (g_current_user_id === -1) {
+      alert("Only logged in users can vote.");
+      return;
+    }
+    
 		var $target = $(event.target);
 		var qblock = $target.closest(".vote-cell");
 		var	rblock = qblock.find(".vote-block-ctr")
@@ -99,7 +105,10 @@ $(document).ready(function () {
 	})
 	
 	//This block is for when a user clicks to select a best answer,
-	//i.e., on the empty checkmark outline
+	//i.e., on the empty checkmark outline.
+  
+  //accept blocks are only displayed to the owner of a question, so unlike
+  //voting there is no statement to catch anonymous users needed.
 	$(".accept-block").on("click", function (event) {
 		var $target = $(event.target);
 		var ablock = $target.closest(".vote-cell");

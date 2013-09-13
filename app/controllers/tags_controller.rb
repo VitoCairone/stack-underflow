@@ -14,6 +14,7 @@ class TagsController < ApplicationController
   # GET /tags/1.json
   def show
     @tag = Tag.find(params[:id])
+    @no_editor = true
 
     respond_to do |format|
       format.html # show.html.erb
