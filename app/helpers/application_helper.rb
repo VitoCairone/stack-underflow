@@ -58,16 +58,40 @@ module ApplicationHelper
     session[:session_token] = "LOGGED_OUT"
   end
 
-  def render_errors_of(object)
-    render :json => object.errors.full_messages, status: 422
-  end
-
   def on_answer?
     @on_answer = params.has_key?(:answer_id)
   end
 
   def owned(object)
     current_user && current_user.id == object.user_id
+  end
+  
+  def render_errors_of(object)
+    render :json => object.errors.full_messages, status: 422
+  end
+  
+  def render_markdown(markdown_from_db)
+    @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+    unsanitized = @markdown.render(markdown_from_db)
+    Sanitize.clean(unsanitized, Sanitize::Config::RELAXED)
+  end
+  
+  # the purpose of this function is to display about the first two lines of
+  # a question, compressed without linebreaks, while preserving formatting
+  # such as bold, italic, and pre tags.
+  def render_markdown_short(markdown_from_db)
+    # first, render markdown
+    markdown_long = render_markdown(markdown_from_db)
+    # second, cut off, and close any tags which are thus left unclosed
+    was_cutoff = markdown_long.length > 200
+    markdown_long = Nokogiri::HTML::fragment(markdown_long.first(200)).to_xml
+    #third, strip <p></p> <pre></pre> tags to eliminate linebreaks
+    #redcarpet wraps in <pre><code> so code is still properly demarcated
+    markdown_long.gsub!(/<(\/|)pre>/,"")
+    markdown_long.gsub!(/<(\/|)p>/,"")
+    
+     markdown_long += " ..." if was_cutoff
+     markdown_long
   end
 
   def set_context

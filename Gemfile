@@ -35,6 +35,11 @@ gem 'koala', '~> 1.7.0rc1'
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
 
+# render user-input Markdown from the DB into HTML on pages
+gem 'redcarpet'
+gem 'sanitize'
+gem 'nokogiri' #seems to be included by default, but just to be explicit
+
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 

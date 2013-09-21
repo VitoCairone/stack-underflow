@@ -43,14 +43,7 @@
               <%= render partial: "questions/delete", locals: { object: question, object_url: question_url(question) } %>
             </div>
             <div class="index-question-body" id="question-body-<%=question.id%>">
-              <% question_body = strip_tags(question.body.html_safe) %>
-              <% if question_body.length > 160 %>
-                <!-- TODO: break slightly more elegantly, -->
-                <!-- i.e., prefer the end of a word -->
-                <%= question_body[0..160] %> ...
-              <% else %>
-                <%= question_body %>
-              <% end %>
+              <%= render_markdown_short(question.body).html_safe %>
             </div>
             
             <div class="index-question-tags" id="question-tags-<%= question.id %>">

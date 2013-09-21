@@ -7,7 +7,7 @@
 		<td>
 			<div class="single-answer">
 				<!-- TODO: fix this -->
-			  <%= answer.body.html_safe %>
+			  <%= render_markdown(answer.body).html_safe %>
 				
 				<% del_locals = { object: answer, object_url: question_answer_url(@question, answer) } %>
 				<%= render partial: "questions/delete", locals: del_locals %>
@@ -26,7 +26,7 @@
 		  <div class="answer-comments">
 		    <% answer.comments.each do |comment| %>
 					<div class="single-answer-comment">
-		        <%= comment.body.html_safe %>  
+		        <%= render_markdown(comment.body).html_safe %>  
 						by <%= comment.user.username %>
 						<% del_locals = { object: comment, object_url: answer_comment_url(answer, comment) } %>
 						<%= render partial: "questions/delete", locals: del_locals %>

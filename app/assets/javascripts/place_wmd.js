@@ -1,5 +1,10 @@
 $(document).ready(function() {
   
+  //Create a converter no matter what; on pages without an editor,
+  //it will very likely still be needed to render content from the DB
+  //which is stored as Markdown.'
+  
+  
   if ($(".wmd-input").length === 0) {
     return;
   }
@@ -8,12 +13,15 @@ $(document).ready(function() {
 	(function () {
 	    var converter = Markdown.getSanitizingConverter();
 
+      //this extension is commented-out because the syntax isn't supported
+      //  by Redcarpet
+
 			//fenced block-quote ("""  """) plugin
-	    converter.hooks.chain("preBlockGamut", function (text, rbg) {
-	        return text.replace(/^ {0,3}""" *\n((?:.*?\n)+?) {0,3}""" *$/gm, function (whole, inner) {
-	            return "<blockquote>" + rbg(inner) + "</blockquote>\n";
-	        });
-	    });
+      // converter.hooks.chain("preBlockGamut", function (text, rbg) {
+      //     return text.replace(/^ {0,3}""" *\n((?:.*?\n)+?) {0,3}""" *$/gm, function (whole, inner) {
+      //         return "<blockquote>" + rbg(inner) + "</blockquote>\n";
+      //     });
+      // });
 
 	    var editor = new Markdown.Editor(converter);
 
@@ -29,12 +37,13 @@ $(document).ready(function() {
       return;
     }
     
-		var converter = Markdown.getSanitizingConverter();
+		//var converter = Markdown.getSanitizingConverter();
 
 		//this is not adequate for production of a real app
 		//instead, store markup and convert on render,
 		//or use ruby to convert and sanitize in the controller
-		var user_text = converter.makeHtml($("#wmd-input").val());
+		//var user_text = converter.makeHtml($("#wmd-input").val());
+    var user_text = $("#wmd-input").val();
 
 		//send only a unique list of tags when tags are redundant
 		//TODO: make redundant tags unselectable on the UI side
@@ -80,12 +89,13 @@ $(document).ready(function() {
       return;
     }
     
-		var converter = Markdown.getSanitizingConverter();
+		//var converter = Markdown.getSanitizingConverter();
 
 		//this is not adequate for production of a real app
 		//instead, store markup and convert on render,
 		//or use ruby to convert and sanitize in the controller
-		var user_text = converter.makeHtml($("#wmd-input").val());
+		//var user_text = converter.makeHtml($("#wmd-input").val());
+    var user_text = $("#wmd-input").val();
 
 		var data = {
 			answer: {
@@ -167,7 +177,8 @@ $(document).ready(function() {
 			//this is not adequate for production of a real app
 			//instead, store markup and convert on render,
 			//or use ruby to convert and sanitize in the controller
-			var user_text = converter.makeHtml($("#wmd-input" + suffix).val());
+			//var user_text = converter.makeHtml($("#wmd-input" + suffix).val());
+      var user_text = $("#wmd-input" + suffix).val();
 
 			var data = {
 				comment: {

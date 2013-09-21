@@ -5,13 +5,13 @@
 		</td>
 		<td>		
 			<div class="show-question-body" id="question-body-<%=@question.id%>">
-				<%= @question.body.html_safe %>
+				<%= render_markdown(@question.body).html_safe %>
 				<% del_locals = { object: @question, object_url: question_url(@question) } %>
 				<%= render partial: "questions/delete",	locals: del_locals %>
 				<% com_id = "comment-q-#{@question.id}" %>
 				<% com_action = question_comments_url(@question) %>
-				<!-- splitting up this line introduces padding whitespace -->
-				[<a href="#" class="comment-link" id="<%= com_id %>" data-action="<%= com_action %>">comment</a>]
+				[<a href="#" class="comment-link" id="<%= com_id %>"
+          data-action="<%= com_action %>">comment</a>]
 				<div class="asker-block">
 					<% ask_time = @question.created_at.localtime %>
 					asked <%= ask_time.strftime("%b %e at %l:%M %P") %>
@@ -22,7 +22,7 @@
 			<div class="question-comments">
   			<% @question.comments.each do |comment| %>
 					<div class="question-comment">
-    				<%= comment.body.html_safe %> by <%= comment.user.username %>
+    				<%= render_markdown(comment.body).html_safe %> by <%= comment.user.username %>
 						<% del_locals = { object: comment, object_url: question_comment_url(@question, comment) } %>
 						<%= render partial: "questions/delete",	locals: del_locals %>
 					</div>
