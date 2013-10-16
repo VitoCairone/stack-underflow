@@ -1,13 +1,13 @@
-<table class="corridor-table">
+
 	
-	<tr>
+
 		<div class="index-header">
 			<%= header_text %>
 		</div>
-	</tr>
-	<tr>
+
+	<div class="row">
 		
-		<td class="content-column">
+		<div class="content-column col-xs-9">
 			<!-- this partial does almost all the work on this page -->
 			<%= render "questions/list" %>
 
@@ -64,10 +64,10 @@
   			</div>
       
       <% end %>
-		</td> <!-- /content-column -->
+		</div> <!-- /content-column -->
 		
-		<td class="related-column" valign="top">
-			<div style="padding: 2px; padding-top: 6px;">
+		<div class="related-column col-xs-3">
+			<div>
 				<% Tag.all.each do |tag| %>
 					<span class="tag-show">
 						<%= link_to tag.name, tag_url(tag) %>
@@ -77,7 +77,6 @@
 					<br>
 				<% end %>
 			</div>
-		</td>
+		</div>
 		
-	</tr>
-</table> <!-- /corridor-table -->
+	</div> <!-- row -->

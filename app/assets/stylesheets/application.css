@@ -13,36 +13,3 @@
  *= require bootstrap
  *= require pagedown.css
  */
-
-/* this allows the header to be flush with the top and sides the page.
- * As a result, all other elements need explicit styling or they will also be
- * flush with the sides of the page.
- */
-body {
-	margin: 0;
-	margin-bottom: 50px;
-	padding: 0;
-	font-family: Arial, Liberation Sans, DejaVu Sans, sans-serif;
-}
-
-/* without this, <pre> tags will not wrap their contents */
-pre {
- white-space: pre-wrap;       /* css-3 */
- white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
- white-space: -pre-wrap;      /* Opera 4-6 */
- white-space: -o-pre-wrap;    /* Opera 7 */
- word-wrap: break-word;       /* Internet Explorer 5.5+ */
-}
-
-.header-bar {
-	text-align: right;
-	background-color: #ccc;
-  height: 30px;
-	margin-right: 0px; /* margin seperates the el edge from the page edge */
-  padding-top: 10px;
-	padding-right: 10px; /* padding seperates the content from the el edge */
-}
-
-.hidden {
-	visibility: hidden;
-}
